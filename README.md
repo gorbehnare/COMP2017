@@ -7,6 +7,6 @@
 - 05 -
 - 06 -
 ## Assignments and Labs
-- [Lab 00 - Lab Environment Overview](./labs/Lab%2000%20-%20Lab%20Environment%20Overview.html)
+- [Lab Environment Overview](./labs/Lab%2000%20-%20Lab%20Environment%20Overview.html)
 - [Lab 01 - Creating Virtual Lab Environment](./labs/Lab%2001%20-%20Creating%20Virtual%20Lab%20Environment.html)
 - [Lab 02 - Primary Domain Controller](./labs/Lab%2002%20-%20Primary%20Domain%20Controller.html)
