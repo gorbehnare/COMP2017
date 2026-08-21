@@ -4,7 +4,7 @@
 - [02 - Introduction to Active Directory](./02%20-%20Introduction%20to%20Active%20Directory.html)
 - [03 - Active Directory Domain Service](./03%20-%20Active%20Directory%20Domain%20Service.html)
 - [04 - Active Directory Certificate Services (CS)](./04%20-%20Active%20Directory%20Certificate%20Services%20(CS).html)
-- 05 -
+- [05 - Managing Active Directory Objects](./05%20-%20Managing%20Active%20Directory%20Objects.html)
 - 06 -
 ## Assignments and Labs
 - [Lab Environment Overview](./labs/Lab%2000%20-%20Lab%20Environment%20Overview.html)
