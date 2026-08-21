@@ -553,10 +553,10 @@ hue-6-2: #c18401
 .hljs-link {
   text-decoration: underline;
 }</style>
-						<title>03 - Active Directory Domain Service (DS)</title>
+						<title>03 - Active Directory Domain Service</title>
 					</head>
 					<body>
-						<div class="exported-note"><div class="exported-note-title">03 - Active Directory Domain Service (DS)</div>
+						<div class="exported-note"><div class="exported-note-title">03 - Active Directory Domain Service</div>
 
 <style>
 		/* https://necolas.github.io/normalize.css/ */
@@ -1094,21 +1094,28 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 <li>Options for configuring security policies that apply to all users and computers, including management of user desktops and security settings (Group Policy)</li>
 </ul>
 <h1 id="communications-protocol">Communications Protocol</h1>
-<p>AD DS uses LDAP for communications. LDAP is an X.500 standard based on TCP/IP, and is a client-server model for accessing, searching and modifying a directory service. Refer to Wikipedia articles for <a data-from-md="" title="https://en.wikipedia.org/wiki/X.500" href="https://en.wikipedia.org/wiki/X.500">X.500</a> and <a data-from-md="" title="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol" href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol">LDAP</a> for more information.</p>
+<p>AD DS relies on several protocols for its fucntions:</p>
+<ul>
+<li>LDAP/LDAPS for directory access</li>
+<li>Kerberos for authentication</li>
+<li>DNS for service location</li>
+<li>SMB and RPC for various directory functions and replication activities</li>
+</ul>
+<p>LDAP(S) is an X.500 standard based on TCP/IP, and is a client-server model for accessing, searching and modifying a directory service. Refer to Wikipedia articles for <a data-from-md="" title="https://en.wikipedia.org/wiki/X.500" href="https://en.wikipedia.org/wiki/X.500">X.500</a> and <a data-from-md="" title="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol" href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol">LDAP</a> for more information.</p>
 <h1 id="authentication-vs-authorization">Authentication vs. Authorization</h1>
 <p>Authentication is the process of verifying the identity of a user or system on a network. Two components of AD DS Authentication are interactive logon (grants access to the local computer) and network authentication (grants access to network resources).<br/>
 Authorization is the process of verifying that an authenticated user has permission to perform an action. When a user account is created, an SID (Security Identifier) is issued to the user. During the authentication process, security tokens are created that contain the user&apos;s SID and all related group SIDs. Shared resources on a network include ACL (Access Control List) that define who can access the resource. Security tokens are compared against the DACL (Discretionary Access Control List) on the resource to grant or deny access.</p>
-<h1 id="as-ds-installation-requirements">AS DS Installation Requirements</h1>
+<h1 id="ad-ds-installation-requirements">AD DS Installation Requirements</h1>
 <ol>
 <li>TCP/IP network and DNS server addresses</li>
 <li>Local administrator account credentials for the server if new domain controller, or an account that is a member of the Domain Admin group if installing additional AD DS in an existing domain</li>
 <li>Domain Name System (DNS) Infrastructure must be in place. DNS server can be installed along with the AD DS service if needed. If using or updating existing DNS zones, you must have the required credentials and permissions to the parent DNS zone to allow DNS delegations to be created by the installation process.</li>
 </ol>
-<h2 id="as-ds-dns-requirements">AS DS DNS Requirements</h2>
+<h2 id="ad-ds-dns-requirements">AD DS DNS Requirements</h2>
 <ol>
-<li>AS DS requires a DNS infrastructure to function</li>
+<li>AD DS requires a DNS infrastructure to function</li>
 <li>AD domain names must be DNS domain names (must be FQDN)</li>
-<li>AS DS domain controller records must be registered in DNS to enable other domain controllers and client computers to locate the domain controller using FQDN (via <code class="inline-code">srv</code> records)</li>
+<li>AD DS domain controller records must be registered in DNS to enable other domain controllers and client computers to locate the domain controller using FQDN (via <code class="inline-code">srv</code> records)</li>
 <li>DNS zones can be stored in AD DS as Active Directory integrated zones (DS can be used to manage, replicate and enforce the security boundary of the DNS zone file)</li>
 </ol>
 <h1 id="ad-ds-components">AD DS Components</h1>
@@ -1116,7 +1123,7 @@ Authorization is the process of verifying that an authenticated user has permiss
 <ul>
 <li>Data store (required component)</li>
 <li>Domain controllers (required component)</li>
-<li>Global catalogue server (required component)</li>
+<li>Global Catalog server (At least one is required)</li>
 <li>Read-Only Domain Controller (RODC) (optional component)</li>
 </ul>
 <p>Logical Components:</p>
@@ -1138,22 +1145,36 @@ Authorization is the process of verifying that an authenticated user has permiss
 <li>Replicate updates to other domain controllers in the domain and forest</li>
 <li>Allows administrative access to manage user accounts and network resources</li>
 </ul>
-<h3 id="global-catalogue-servers">Global Catalogue Servers</h3>
-<p>Global Catalogue servers are domain controllers that store a copy of the global catalogue. A global catalogue:</p>
+<h3 id="global-catalog-servers">Global Catalog Servers</h3>
+<p>Global Catalog servers are domain controllers that store a copy of the global Catalog. A global Catalog:</p>
 <ul>
 <li>Contains a copy of all AD DS objects in a forest that includes a subset of the attributes for each object</li>
 <li>Improves efficiency of object searches by avoiding unnecessary referrals to domain controllers</li>
-<li>Required for users to log on to a domain</li>
+<li>is typically required for forest-wide logon processes, universal group membership evaluation, and UPN resolution.</li>
 </ul>
+<p>For more information, refer to <a data-from-md="" title="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc786438(v=ws.10)#global-catalog-servers" href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc786438(v=ws.10)#global-catalog-servers">https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc786438(v=ws.10)#global-catalog-servers</a></p>
 <h3 id="the-ad-ds-data-store">The AD DS Data Store</h3>
 <p>The data store contains the database files and processes that store and manage directory information for users, services, and applications.</p>
 <ul>
 <li>Consists of a single file <code class="inline-code">Ntds.dit</code> that, by default, is stored at <code class="inline-code">%SystemRoot%\NTDS</code> on all domain controllers (the location is configurable)</li>
-<li>Is only accessible through the domain controller processes and protocols</li>
+<li>The file is only accessible through the domain controller processes and protocols</li>
 </ul>
-<h3 id="the-ad-ds-replication-and-sites">The AD DS Replication and Sites</h3>
-<p>Replication copies all updates of the AD DS database to all other domain controllers in a domain or forest. It ensures all domain controllers have the same information. It uses a multi-master replication model and can be managed by creating AD DS sites. The AD DS replication topology is created automatically as new domain controllers are added to the domain; however, it can be modified using sites.</p>
-<p>An AD DS site represents a network segment where all domain controllers are connected by a reliable network connection. Sites depend on network bandwidth. This is usually associated with IP subnets. The site is used as a unit to manage replication and client logon traffic, and are also utilized by site-aware applications such as DFS (Distributed File System) and Exchange Server. Sites can potentially be used to assign group policy objects to span specific users and computers within the site. Sites are not organizational boundaries, meaning an organizational unit can be located at multiple sites.</p>
+<h3 id="the-ad-ds-sites-replication-and-operation-masters">The AD DS Sites, Replication, and Operation Masters</h3>
+<p>Since AD DS is meant to be scalable, the infrastructure can span multiple networks (sites), sub-domains (trees), and other domains (forests). That means the infrastructure may have multiple domain controllers depending on the scale. The AD DS database needs to stay synchronized across all domain controllers in order to the system to function correctly.</p>
+<p>Replication distributes directory updates to the appropriate domain controllers according to the partition being replicate. It ensures all domain controllers have the same information. Replication uses a multi-master replication model and can be managed by creating AD DS sites. The AD DS replication topology is created automatically as new domain controllers are added to the domain; however, it can be modified using sites configuration.</p>
+<p>An AD DS site represents a network segment where all domain controllers are connected by a reliable network connection (well-connected IP subnets). Sites depend on network bandwidth. This is usually associated with IP subnets. The site is used as a unit to manage replication and client logon traffic, and are also utilized by site-aware applications such as DFS (Distributed File System) and Exchange Server. Sites can potentially be used to assign group policy objects to span specific users and computers within the site. Sites are not organizational boundaries, meaning an organizational unit can span multiple sites.</p>
+<p>In order to prevent conflicting information in the AD DS database during some replication process in a multi-master system, &quot;Operations Master (FSMO)&quot; roles are assigned to each domain controller. Operations Master (FSMO) prevent conflicting updates from being made to the database by only allowing specific tasks that no other domain controllers are permitted to perform. Operations Master (FSMO) roles are broken down to 5 separate roles.</p>
+<p>The following Operations Master (FSMO) roles perform operations that must occur on only one domain controller in the forest:</p>
+<ul>
+<li>Schema master</li>
+<li>Domain naming master</li>
+</ul>
+<p>The following Operations Master (FSMO) perform operations that must occur on only one domain controller in a domain:</p>
+<ul>
+<li>Primary Domain Controller (PDC) emulator</li>
+<li>Infrastructure master</li>
+<li>Relative ID (RID) master</li>
+</ul>
 <h2 id="ad-ds-logical-components">AD DS Logical Components</h2>
 <h3 id="ad-ds-schema">AD DS Schema</h3>
 <p>The schema defines every type of object that can be stored in a directory, and enforces rules regarding object creation and configuration. For example, <code class="inline-code">Class</code> dictates what objects can be created in the directory, such as an object of class <code class="inline-code">user</code> or an object of class <code class="inline-code">computer</code>. The <code class="inline-code">Attribute</code> dictates what information can be attached to each object, such as <code class="inline-code">display name</code>. A typical object in the Microsoft AD DS schema can have hundreds of attributes, which can be Windows OS or Microsoft-specific.</p>
@@ -1162,12 +1183,12 @@ Authorization is the process of verifying that an authenticated user has permiss
 <ul>
 <li>Domains define an administrative boundary for applying policies to groups of objects.</li>
 <li>Domains provide a replication boundary for replicating data between domain controllers.</li>
-<li>Domains provide an authentication and authorization boundary to limit the scope of access to resources</li>
+<li>Domains provide administrative and replication boundaries, while the forest is generally considered the primary security boundary.</li>
 </ul>
 <h3 id="domain-trees">Domain Trees</h3>
 <p>A domain tree is a hierarchy of domains in AD DS. It consists of a parent domain and sub-domains (child domains). By default, all sub-domains create a transitive two-way trust with other domains and sub-domains in the tree.</p>
 <h3 id="domain-forests">Domain Forests</h3>
-<p>Forests are a collection of one or more domain trees. Forests share a common schema, configuration partition, and a global catalogue to enable search. The global catalogue in a forest contains all the objects in all domains along with a subset of their attributes. This enables searching for objects in all domains in the forest.<br/>
+<p>Forests are a collection of one or more domain trees. Forests share a common schema, configuration partition, and a global Catalog to enable search. The global Catalog in a forest contains all the objects in all domains along with a subset of their attributes. This enables searching for objects in all domains in the forest.<br/>
 The trust is automatically enabled between all domains in the forest. Enterprise Admins and Schema Admins are shared across the entire forest, meaning the same accounts can make changes to all domains in the forest. Domain Admins are limited to a single domain.</p>
 <h3 id="organizational-units-ou">Organizational Units (OU)</h3>
 <p>OUs are AD containers that can contain users, groups, computers, and other OUs. They are used to represent organizational hierarchy and/or administrative logical boundaries within a domain. This enables the objects within an OU to be managed consistently, and allows delegation of administrative privileges and application of policies along OUs as a logical partition within a domain.</p>
@@ -1199,7 +1220,7 @@ The trust is automatically enabled between all domains in the forest. Enterprise
 <li><code class="inline-code">Printers</code>: used to simplify the process of locating and connecting to printers</li>
 <li><code class="inline-code">Shared folders</code>: enables users to search for shared folders</li>
 </ul>
-<p><sub class="jop-noMdConv">18/08/2026 16:08</sub></p>
+<p><sub class="jop-noMdConv">21/08/2026 16:55</sub></p>
 </div></div>
 					</body>
 				</html>
