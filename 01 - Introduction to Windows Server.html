@@ -4,452 +4,7 @@
 					<head>
 						<meta charset="UTF-8"/>
 						<meta name="viewport" content="width=device-width, initial-scale=1"/>
-						<style>.jsdraw--editButton {
-  display: inline-block;
-  opacity: 0;
-  overflow: hidden;
-  z-index: 1;
-  position: relative;
-  align-self: flex-end;
-  justify-self: right;
-  transition: opacity 0.2s ease;
-}
-
-.jsdraw--editButton.-show,
-.jsdraw--editButton:hover {
-  opacity: 0.9;
-  overflow: visible;
-}
-
-.jsdraw--editButton > button {
-  width: min-content;
-  max-height: 50px;
-  position: absolute;
-}</style><script>(() => {
-  // src/localization.ts
-  var defaultStrings = {
-    insertDrawing: "Insert Drawing",
-    insertDrawingInNewWindow: "Insert drawing in new window",
-    restoreFromAutosave: "Restore from autosaved drawing",
-    deleteAutosave: "Delete all autosaved drawings",
-    noSuchAutosaveExists: "No autosave exists",
-    discardChanges: "Discard changes",
-    defaultImageTitle: "Freehand Drawing",
-    edit: "Edit",
-    close: "Close",
-    saveAndClose: "Save and close",
-    overwriteExisting: "Overwrite existing",
-    saveAsNewDrawing: "Save as a new drawing",
-    clickBelowToContinue: "Done! Click below to continue.",
-    discardUnsavedChanges: "Discard unsaved changes?",
-    resumeEditing: "Resume editing",
-    saveAndResumeEditing: "Save and resume editing",
-    saveChanges: "Save changes",
-    exitInstructions: "All changes saved! Click below to exit.",
-    settingsPaneDescription: "Settings for the Freehand Drawing image editor.",
-    setting__disableFullScreen: "Dialog mode",
-    setting__disableFullScreenDescription: "Enabling this setting causes the editor to only partially fill the Joplin window.",
-    setting__autosaveIntervalSettingLabel: "Autosave interval (minutes)",
-    setting__autosaveIntervalSettingDescription: 'Adjusts how often a backup copy of the current drawing is created. The most recent autosave can be restored by searching for ":restore autosave" in the command palette (ctrl+shift+p or cmd+shift+p on MacOS) and clicking "Restore from autosaved drawing". If this setting is set to zero, autosaves are created every two minutes.',
-    setting__themeLabel: "Theme",
-    setting__toolbarTypeLabel: "Toolbar type",
-    setting__toolbarTypeDescription: "This setting switches between possible toolbar user interfaces for the image editor.",
-    setting__keyboardShortcuts: "Keyboard shortcuts",
-    toolbarTypeDefault: "Default",
-    toolbarTypeSidebar: "Sidebar",
-    toolbarTypeDropdown: "Dropdown",
-    styleMatchJoplin: "Match Joplin",
-    styleJsDrawLight: "Light",
-    styleJsDrawDark: "Dark",
-    images: "Images",
-    pdfs: "PDFs",
-    allFiles: "All Files",
-    loadLargePdf: (pageCount) => `A selected file is a large PDF (${pageCount} pages). Loading it may take some time and increase the size of the current drawing. Continue?`,
-    notAnEditableImage: (resourceId, resourceType) => `Resource ${resourceId} is not an editable image. Unable to edit resource of type ${resourceType}.`
-  };
-  var localizations = {
-    de: {
-      insertDrawing: "Zeichnung einf\xFCgen",
-      insertDrawingInNewWindow: "Zeichnung in neuem Fenster einf\xFCgen",
-      restoreFromAutosave: "Automatische Sicherung wiederherstellen",
-      deleteAutosave: "Alle automatischen Sicherungen l\xF6schen",
-      noSuchAutosaveExists: "Keine automatischen Sicherungen vorhanden",
-      discardChanges: "\xC4nderungen verwerfen",
-      defaultImageTitle: "Freihand-Zeichnen",
-      edit: "Bearbeiten",
-      close: "Schlie\xDFen",
-      saveAndClose: "Speichern und Schlie\xDFen",
-      overwriteExisting: "Existierende Zeichnung \xFCberschreiben",
-      saveAsNewDrawing: "Als neue Zeichnung speichern",
-      clickBelowToContinue: "Fertig! Unten klicken, um fortzufahen.",
-      discardUnsavedChanges: "Ungespeicherte \xC4nderungen verwerfen?",
-      resumeEditing: "Weiter bearbeiten",
-      saveAndResumeEditing: "Speichern und weiter bearbeiten",
-      saveChanges: "\xC4nderungen speichern",
-      exitInstructions: "Alle \xC4nderungen gespeichert! Unten klicken, um das Fenster zu schlie\xDFen.",
-      settingsPaneDescription: "Einstellungen f\xFCr Freihand-Zeichnen.",
-      setting__disableFullScreen: "Dialogmodus",
-      setting__disableFullScreenDescription: "Wenn diese Einstellung aktiviert ist, f\xFCllt der Editor das Joplin-Fenster nur teilweise aus.",
-      setting__autosaveIntervalSettingLabel: "Intervall f\xFCr die automatische Speicherung (Minuten)",
-      setting__autosaveIntervalSettingDescription: "Legt fest, wie oft eine Sicherungskopie der aktuellen Zeichnung erstellt wird. Die letzte automatische Speicherung kann wiederhergestellt werden, indem du in der Befehlspalette (Strg+Umschalt+P oder Cmd+Umschalt+P unter MacOS) nach \u201E:restore autosave\u201C suchst und auf \u201EAutomatische Sicherung wiederherstellen\u201C klickst. Wenn diese Einstellung auf Null gesetzt ist, werden alle zwei Minuten automatische Speichervorg\xE4nge durchgef\xFChrt.",
-      setting__themeLabel: "Design",
-      setting__toolbarTypeLabel: "Toolbar-Typ",
-      setting__toolbarTypeDescription: "Diese Einstellung wechselt zwischen den m\xF6glichen Benutzeroberfl\xE4chen der Symbolleiste f\xFCr den Bildeditor.",
-      setting__keyboardShortcuts: "Tastaturk\xFCrzel",
-      toolbarTypeDefault: "Standard",
-      toolbarTypeSidebar: "Sidebar",
-      toolbarTypeDropdown: "Dropdown-Men\xFC",
-      styleMatchJoplin: "wie Joplin",
-      styleJsDrawLight: "Hell",
-      styleJsDrawDark: "Dunkel",
-      images: "Bilder",
-      pdfs: "PDFs",
-      allFiles: "Alle Dateien",
-      loadLargePdf: (pageCount) => `Die ausgew\xE4hlte Datei ist eine gro\xDFe PDF-Datei (mit ${pageCount} Seiten). Das Laden kann einige Zeit dauern und die Gr\xF6\xDFe der aktuellen Zeichnung erh\xF6hen. Fortfahren?`,
-      notAnEditableImage: (resourceId, resourceType) => `Die Ressource ${resourceId} ist kein bearbeitbares Bild. Ressource vom Typ ${resourceType} kann nicht bearbeitet werden.`
-    },
-    en: defaultStrings,
-    fr: {
-      insertDrawing: "Ins\xE9rer un dessin",
-      insertDrawingInNewWindow: "Ins\xE9rer un dessin dans une nouvelle fen\xEAtre",
-      restoreFromAutosave: "Restaurer depuis la sauvegarde automatique",
-      deleteAutosave: "Supprimer toutes les sauvegardes automatiques",
-      noSuchAutosaveExists: "Aucune sauvegarde automatique n\u2019existe",
-      discardChanges: "Ignorer les modifications",
-      defaultImageTitle: "Dessin \xE0 main lev\xE9e",
-      edit: "Modifier",
-      close: "Fermer",
-      saveAndClose: "Enregistrer et fermer",
-      overwriteExisting: "\xC9craser l\u2019existant",
-      saveAsNewDrawing: "Enregistrer comme nouveau dessin",
-      clickBelowToContinue: "Termin\xE9 ! Cliquez ci-dessous pour continuer.",
-      discardUnsavedChanges: "Ignorer les modifications non enregistr\xE9es ?",
-      resumeEditing: "Reprendre l\u2019\xE9dition",
-      saveAndResumeEditing: "Enregistrer et continuer l\u2019\xE9dition",
-      saveChanges: "Enregistrer les modifications",
-      exitInstructions: "Toutes les modifications sont enregistr\xE9es. Cliquez ci-dessous pour quitter.",
-      settingsPaneDescription: "Param\xE8tres pour l\u2019\xE9diteur de dessin.",
-      setting__disableFullScreen: "Mode dialogue",
-      setting__disableFullScreenDescription: "Lorsque cette option est activ\xE9e, l\u2019\xE9diteur ne remplit que partiellement la fen\xEAtre Joplin.",
-      setting__autosaveIntervalSettingLabel: "Intervalle de sauvegarde automatique (minutes)",
-      setting__autosaveIntervalSettingDescription: "D\xE9finit la fr\xE9quence de cr\xE9ation des sauvegardes automatiques du dessin courant.",
-      setting__themeLabel: "Th\xE8me",
-      setting__toolbarTypeLabel: "Type de barre d\u2019outils",
-      setting__toolbarTypeDescription: "Cette option permet de changer l\u2019interface de la barre d\u2019outils de l\u2019\xE9diteur.",
-      setting__keyboardShortcuts: "Raccourcis clavier",
-      toolbarTypeDefault: "Par d\xE9faut",
-      toolbarTypeSidebar: "Barre lat\xE9rale",
-      toolbarTypeDropdown: "Menu d\xE9roulant",
-      styleMatchJoplin: "Identique \xE0 Joplin",
-      styleJsDrawLight: "Clair",
-      styleJsDrawDark: "Sombre",
-      images: "Images",
-      pdfs: "PDF",
-      allFiles: "Tous les fichiers",
-      loadLargePdf: (pageCount) => `Le fichier s\xE9lectionn\xE9 est un PDF volumineux (${pageCount} pages). Son chargement peut prendre du temps et augmenter la taille du dessin. Continuer ?`,
-      notAnEditableImage: (resourceId, resourceType) => `La ressource ${resourceId} n\u2019est pas une image modifiable. Impossible de modifier une ressource de type ${resourceType}.`
-    },
-    es: {
-      insertDrawing: "A\xF1ada dibujo",
-      restoreFromAutosave: "Resturar al autoguardado",
-      deleteAutosave: "Borrar el autoguardado",
-      noSuchAutosaveExists: "No autoguardado existe",
-      discardChanges: "Descartar cambios",
-      defaultImageTitle: "Dibujo",
-      edit: "Editar",
-      close: "Cerrar",
-      saveAndClose: "Guardar y cerrar",
-      overwriteExisting: "Sobrescribir existente",
-      saveAsNewDrawing: "Guardar como dibujo nuevo",
-      clickBelowToContinue: "Guardado. Ponga \xABok\xBB para continuar.",
-      discardUnsavedChanges: "\xBFDescartar cambios no guardados?",
-      resumeEditing: "Continuar editando",
-      saveAndResumeEditing: "Guardar y continuar editando"
-    },
-    hr: {
-      insertDrawing: "Umetni crte\u017E",
-      insertDrawingInNewWindow: "Umetni crte\u017E u novom prozoru",
-      restoreFromAutosave: "Obnovi iz automatski spremljenog crte\u017Ea",
-      deleteAutosave: "Izbri\u0161i sve automatski spremljene crte\u017Ee",
-      noSuchAutosaveExists: "Ne postoji automatski spremljeni crte\u017E",
-      discardChanges: "Odbaci promjene",
-      defaultImageTitle: "Prostoru\u010Dni crte\u017E",
-      edit: "Uredi",
-      close: "Zatvori",
-      saveAndClose: "Spremi i zatvori",
-      overwriteExisting: "Prepi\u0161i postoje\u0107e",
-      saveAsNewDrawing: "Spremi kao novi crte\u017E",
-      clickBelowToContinue: "Gotovo! Klikni dolje za nastavak.",
-      discardUnsavedChanges: "Odbaciti nespremljene promjene?",
-      resumeEditing: "Nastavi ure\u0111ivati",
-      saveAndResumeEditing: "Spremi i nastavi ure\u0111ivati",
-      saveChanges: "Spremi promjene",
-      exitInstructions: "Sve promjene su spremljene! Klikni dolje za izlaz.",
-      settingsPaneDescription: "Postavke ure\u0111iva\u010Da crte\u017Ea.",
-      setting__disableFullScreen: "Modus dijaloga",
-      setting__disableFullScreenDescription: "Uklju\u010Divanjem ove postavke \u0107e ure\u0111iva\u010D ispuniti samo dio Joplinovog prozora.",
-      setting__autosaveIntervalSettingLabel: "Interval automatskog spremanja (minute)",
-      setting__autosaveIntervalSettingDescription: "Prilago\u0111ava u\u010Destalost stvaranja sigurnosnih kopija trenuta\u010Dnog crte\u017Ea. Najnoviji automatski spremljeni crte\u017E se mo\u017Ee obnoviti pretra\u017Eivanjem \u201E:restore autosave\u201D u paleti naredbi (ctrl+shift+p ili cmd+shift+p na MacOS-u) i klikom na \u201EObnovi iz automatski spremljenog crte\u017Ea\u201D. Ako je ova postavka postavljena na nulu, automatska spremanja se izvode svake dvije minute.",
-      setting__themeLabel: "Tema",
-      setting__toolbarTypeLabel: "Vrsta alatne trake",
-      setting__toolbarTypeDescription: "Ova postavka omogu\u0107uje prebacivanje izme\u0111u mogu\u0107ih korisni\u010Dkih su\u010Delja alatnih traka za ure\u0111iva\u010D slika.",
-      setting__keyboardShortcuts: "Tipkovni pre\u010Daci",
-      toolbarTypeDefault: "Zadano",
-      toolbarTypeSidebar: "Bo\u010Dna traka",
-      toolbarTypeDropdown: "Padaju\u0107i izbornik",
-      styleMatchJoplin: "Uskladi s Joplinom",
-      styleJsDrawLight: "Svijetla",
-      styleJsDrawDark: "Tamna",
-      images: "Slike",
-      pdfs: "PDF-ovi",
-      allFiles: "Sve datoteke",
-      loadLargePdf: (pageCount) => `Jedna odabrana datoteka je veliki PDF (${pageCount} stranica). U\u010Ditavanje mo\u017Ee potrajati i pove\u0107ati veli\u010Dinu trenuta\u010Dnog crte\u017Ea. \u017Deli\u0161 li nastaviti?`,
-      notAnEditableImage: (resourceId, resourceType) => `Resurs ${resourceId} nije slika koja se mo\u017Ee ure\u0111ivati. Nije mogu\u0107e urediti resurs vrste ${resourceType}.`
-    },
-    ro: {
-      insertDrawing: "Insereaz\u0103 un desen",
-      insertDrawingInNewWindow: "Insereaz\u0103 un desen \xEEntr-o fereastr\u0103 nou\u0103",
-      restoreFromAutosave: "Restaureaz\u0103 dintr-un desen salvat automat",
-      deleteAutosave: "\u0218terge toate desenele salvate automat",
-      noSuchAutosaveExists: "Nicio salvare automat\u0103 nu exist\u0103",
-      discardChanges: "Anuleaz\u0103 modific\u0103rile",
-      defaultImageTitle: "Desen liber",
-      edit: "Editeaz\u0103",
-      close: "\xCEnchide",
-      saveAndClose: "Salveaz\u0103 \u0219i \xEEnchide",
-      overwriteExisting: "Suprascrie existent",
-      saveAsNewDrawing: "Salveaz\u0103 ca desen nou",
-      clickBelowToContinue: "Gata! F\u0103 clic mai jos pentru a continua.",
-      discardUnsavedChanges: "Anulezi modific\u0103rile nesalvate?",
-      resumeEditing: "Continu\u0103 editarea",
-      saveAndResumeEditing: "Salveaz\u0103 \u0219i continu\u0103 editarea",
-      saveChanges: "Salveaz\u0103 modific\u0103rile",
-      exitInstructions: "Toate modific\u0103rile au fost salvate! F\u0103 clic mai jos pentru a ie\u0219i.",
-      settingsPaneDescription: "Set\u0103ri pentru editorul de imagine liber.",
-      setting__disableFullScreen: "Mod dialog",
-      setting__disableFullScreenDescription: "Activarea acestei op\u021Biuni face ca editorul s\u0103 acopere doar par\u021Bial fereastra Joplin.",
-      setting__autosaveIntervalSettingLabel: "Interval salvare automat\u0103 (minute)",
-      setting__autosaveIntervalSettingDescription: 'Ajusteaz\u0103 c\xE2t de des se face o copie de siguran\u021B\u0103 a desenului curent. Cea mai recent\u0103 versiune salvat\u0103 automat poate fi restaurat\u0103 c\u0103ut\xE2nd dup\u0103 ":restore autosave" \xEEn paleta de comenzi (Ctrl+Shift+P sau Cmd+Shift+P pe MacOS) \u0219i f\u0103c\xE2nd clic pe \u201ERestaureaz\u0103 dintr-un desen salvat automat\u201D. Dac\u0103 acest\u0103 setare este 0, salv\u0103rile automate sunt create la fiecare 2 minute.',
-      setting__themeLabel: "Tem\u0103",
-      setting__toolbarTypeLabel: "Tip bar\u0103 de instrumente",
-      setting__toolbarTypeDescription: "Aceast\u0103 setare comut\u0103 \xEEntre posibilele interfe\u021Be pentru editorul de imagine.",
-      setting__keyboardShortcuts: "Scurt\u0103turi de la tastatur\u0103",
-      toolbarTypeDefault: "Implicit",
-      toolbarTypeSidebar: "Bar\u0103 lateral\u0103",
-      toolbarTypeDropdown: "Casete derulante",
-      styleMatchJoplin: "La fel ca Joplin",
-      styleJsDrawLight: "Luminoas\u0103",
-      styleJsDrawDark: "\xCEntunecat\u0103",
-      images: "Imagini",
-      pdfs: "PDF-uri",
-      allFiles: "Toate fi\u0219ierele",
-      loadLargePdf: (pageCount) => `Un fi\u0219ier PDF selectat este un fi\u0219ier mare (${pageCount} de pagini). \xCEnc\u0103rcarea lui ar putea dura ceva timp \u0219i s\u0103 creasc\u0103 dimensiunea desenului curent. Continui?`,
-      notAnEditableImage: (resourceId, resourceType) => `Resursa ${resourceId} nu este o imagine editabil\u0103. Nu se poate edita resursa de tipul ${resourceType}.`
-    },
-    sk: {
-      insertDrawing: "Vlo\u017Ei\u0165 kresbu",
-      insertDrawingInNewWindow: "Vlo\u017Ei\u0165 kresbu do nov\xE9ho okna",
-      restoreFromAutosave: "Obnovi\u0165 z automaticky ulo\u017Eenej kresby",
-      deleteAutosave: "Vymaza\u0165 v\u0161etky automaticky ulo\u017Een\xE9 kresby",
-      noSuchAutosaveExists: "Neexistuj\xFA \u017Eiadne automaticky ulo\u017Een\xE9",
-      discardChanges: "Zru\u0161i\u0165 zmeny",
-      defaultImageTitle: "Kresba vo\u013Enou rukou",
-      edit: "Upravi\u0165",
-      close: "Zavrie\u0165",
-      saveAndClose: "Ulo\u017Ei\u0165 a zavrie\u0165",
-      overwriteExisting: "Prep\xEDsa\u0165 existuj\xFAcu",
-      saveAsNewDrawing: "Ulo\u017Ei\u0165 ako nov\xFA kresbu",
-      clickBelowToContinue: "Hotovo! Kliknite ni\u017E\u0161ie pre pokra\u010Dovanie.",
-      discardUnsavedChanges: "Zru\u0161i\u0165 neulo\u017Een\xE9 zmeny?",
-      resumeEditing: "Pokra\u010Dova\u0165 v \xFAprave",
-      saveAndResumeEditing: "Ulo\u017Ei\u0165 a pokra\u010Dova\u0165 v \xFAprav\xE1ch",
-      saveChanges: "Ulo\u017Ei\u0165 zmeny",
-      exitInstructions: "V\u0161etky zmeny boli ulo\u017Een\xE9! Kliknite ni\u017E\u0161ie pre ukon\u010Denie.",
-      settingsPaneDescription: "Nastavenia pre grafick\xFD editor Kresba vo\u013Enou rukou.",
-      setting__disableFullScreen: "Dial\xF3gov\xFD re\u017Eim",
-      setting__disableFullScreenDescription: "Aktiv\xE1cia tohto nastavenia sp\xF4sob\xED, \u017Ee editor vypln\xED okno Joplin len \u010Diasto\u010Dne.",
-      setting__autosaveIntervalSettingLabel: "Interval automatick\xE9ho ukladania (v min\xFAtach)",
-      setting__autosaveIntervalSettingDescription: "Nastav\xED, ako \u010Dasto sa vytv\xE1ra z\xE1lo\u017En\xE1 k\xF3pia aktu\xE1lnej kresby. Posledn\xE9 automatick\xE9 ulo\u017Eenie je mo\u017En\xE9 obnovi\u0165 vyh\u013Eadan\xEDm \u201E:restore autosave\u201C v palete pr\xEDkazov (ctrl+shift+p alebo cmd+shift+p v syst\xE9me MacOS) a kliknut\xEDm na \u201EObnovi\u0165 z automaticky ulo\u017Eenej kresby\u201C. Ak je toto nastavenie nastaven\xE9 na nulu, automatick\xE9 ulo\u017Eenia sa vytv\xE1raj\xFA ka\u017Ed\xE9 dve min\xFAty.",
-      setting__themeLabel: "T\xE9ma",
-      setting__toolbarTypeLabel: "Typ panela n\xE1strojov",
-      setting__toolbarTypeDescription: "Toto nastavenie prep\xEDna medzi mo\u017En\xFDmi pou\u017E\xEDvate\u013Esk\xFDmi rozhraniami panela n\xE1strojov pre grafick\xFD editor.",
-      setting__keyboardShortcuts: "Kl\xE1vesov\xE9 skratky",
-      toolbarTypeDefault: "Predvolen\xE9",
-      toolbarTypeSidebar: "Bo\u010Dn\xFD panel",
-      toolbarTypeDropdown: "Rozba\u013Eovacie menu",
-      styleMatchJoplin: "Rovnak\xE1 ako Joplin",
-      styleJsDrawLight: "Svetl\xE1",
-      styleJsDrawDark: "Tmav\xE1",
-      images: "Obr\xE1zky",
-      pdfs: "PDF s\xFAbory",
-      allFiles: "V\u0161etky s\xFAbory",
-      loadLargePdf: (pageCount) => `Vybran\xFD s\xFAbor je ve\u013Ek\xFD PDF s\xFAbor (${pageCount} str\xE1n). Jeho na\u010D\xEDtanie m\xF4\u017Ee trva\u0165 nejak\xFD \u010Das a zv\xFD\u0161i\u0165 ve\u013Ekos\u0165 aktu\xE1lnej kresby. Pokra\u010Dova\u0165?`,
-      notAnEditableImage: (resourceId, resourceType) => `Zdroj ${resourceId} nie je upravite\u013En\xFD obr\xE1zok. Nie je mo\u017En\xE9 upravi\u0165 zdroj typu ${resourceType}.`
-    }
-  };
-  var localization;
-  var supportedLanguages = [];
-  var setLocaleInternal = (supportedLocales) => {
-    const languages = [...supportedLocales];
-    for (let language of supportedLocales) {
-      language = language.replace("_", "-");
-      const localeSep = language.indexOf("-");
-      if (localeSep !== -1) {
-        languages.push(language.substring(0, localeSep));
-      }
-    }
-    for (const locale of languages) {
-      if (locale in localizations) {
-        localization = localizations[locale];
-        break;
-      }
-    }
-    supportedLanguages = languages;
-  };
-  var localizationSet = false;
-  var setLocale = (supportedLocales) => {
-    if (typeof supportedLocales === "string") {
-      supportedLocales = [supportedLocales];
-    }
-    setLocaleInternal(supportedLocales);
-    localizationSet = true;
-  };
-  setLocale(navigator.languages);
-  var localization_default = new Proxy(defaultStrings, {
-    get(_target, prop) {
-      if (!localizationSet) {
-        console.warn(
-          "Accessing language data without a localization set. The default Electron locale will be used."
-        );
-      }
-      const propAsKey = prop;
-      return localization?.[propAsKey] ?? defaultStrings[propAsKey];
-    }
-  });
-
-  // src/constants.ts
-  var markdownItContentScriptId = "jsdraw__markdownIt_editDrawingButton";
-
-  // src/contentScripts/utils/makeImageEditable.ts
-  var hasFocus = (element) => {
-    return element.contains(document.activeElement);
-  };
-  var onEdit = (image) => {
-    if (!(image instanceof HTMLElement)) {
-      image = image.currentTarget;
-    }
-    const message = `edit:${image.getAttribute("src")}`;
-    webviewApi.postMessage(markdownItContentScriptId, message).catch((err) => {
-      console.error("Error posting message!", err, "\nMessage: ", message);
-    });
-  };
-  var makeImageEditable = (image, editLabel) => {
-    if (image.classList.contains("js-draw--skip")) return;
-    if (image.ondblclick === onEdit) return;
-    image.ondblclick = onEdit;
-    const addEditButton = () => {
-      const editButtonContainer = document.createElement("span");
-      const editButton = document.createElement("button");
-      const updateLabel = (label) => {
-        editButton.textContent = `${label} \u{1F58A}\uFE0F`;
-      };
-      editButton.ariaDescribedByElements = [image];
-      editButtonContainer.classList.add("jsdraw--editButton");
-      editButtonContainer.appendChild(editButton);
-      updateLabel("Edit");
-      void (async () => {
-        updateLabel(await editLabel);
-      })();
-      image.insertAdjacentElement("afterend", editButtonContainer);
-      const pointerSet = /* @__PURE__ */ new Set();
-      const updateVisibleState = () => {
-        const show = pointerSet.size > 0 || editButton.querySelector(":hover, :focus") || hasFocus(editButton) || hasFocus(image);
-        if (show) {
-          editButtonContainer.classList.add("-show");
-        } else {
-          editButtonContainer.classList.remove("-show");
-        }
-      };
-      const updatePositioning = () => {
-        const containerBox = editButtonContainer.getBoundingClientRect();
-        const imageBox = image.getBoundingClientRect();
-        editButton.style.right = `${imageBox.right - containerBox.right}px`;
-        editButton.style.top = `${imageBox.top - containerBox.top}px`;
-      };
-      image.addEventListener("pointerenter", (event) => {
-        pointerSet.add(event.pointerId);
-        updateVisibleState();
-        updatePositioning();
-      });
-      image.addEventListener("pointerleave", (event) => {
-        pointerSet.delete(event.pointerId);
-        updateVisibleState();
-      });
-      for (const item of [image, editButton]) {
-        item.addEventListener("focus", () => {
-          updateVisibleState();
-          updatePositioning();
-        });
-        item.addEventListener("blur", () => {
-          requestAnimationFrame(() => {
-            updateVisibleState();
-          });
-        });
-      }
-      editButton.onclick = () => {
-        onEdit(image);
-      };
-    };
-    const isRichTextEditor = document.body.classList.contains("mce-content-body") || document.body.id === "tinymce";
-    const hasWebViewApi = typeof webviewApi !== "undefined";
-    const isHtmlNote = !document.body.querySelector("#rendered-md");
-    if (isRichTextEditor || isHtmlNote) {
-      image.style.cursor = "pointer";
-    } else if (hasWebViewApi) {
-      addEditButton();
-    }
-  };
-  var makeImageEditable_default = makeImageEditable;
-
-  // src/contentScripts/markdownIt-content.ts
-  var initLocalePromise = null;
-  var initLocale = async () => {
-    if (initLocalePromise) {
-      return initLocalePromise;
-    }
-    const promise = (async () => {
-      const languages = await webviewApi.postMessage(markdownItContentScriptId, "get-locale:");
-      if (!Array.isArray(languages)) {
-        throw new Error(
-          `Invalid locale request response. Not an array: ${JSON.stringify(languages)}`
-        );
-      }
-      setLocale(languages);
-    })();
-    initLocalePromise = promise;
-    return promise;
-  };
-  var processImages = () => {
-    const images = document.querySelectorAll('img[src*=".svg"]');
-    for (const image of images) {
-      if (image.src.match(/^https?:/) || !image.src.match(/[a-z0-9]{32}[.]svg([?]t=\d+)?$/)) {
-        continue;
-      }
-      makeImageEditable_default(
-        image,
-        (async () => {
-          await initLocale();
-          return localization_default.edit;
-        })()
-      );
-    }
-  };
-  document.addEventListener("joplin-noteDidUpdate", () => {
-    processImages();
-  });
-  processImages();
-})();
-</script></script><style>pre code.hljs {
+						<style>pre code.hljs {
   display: block;
   overflow-x: auto;
   padding: 1em;
@@ -1080,10 +635,10 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 			</style><div id="rendered-md"><h1 id="windows-server-history">Windows Server History</h1>
 <h2 id="windows-nt-server">Windows NT Server</h2>
 <p>Source: <a data-from-md="" title="https://en.wikipedia.org/wiki/Windows_Server" href="https://en.wikipedia.org/wiki/Windows_Server">https://en.wikipedia.org/wiki/Windows_Server</a></p>
-<p>Windows Server was conceived in the 1990&apos;s to compete with Unix and NetWare, which at the time dominated the business and server market. The first version of Windows NT was released as version 3.1 in 1993 as Server and Workstation flavours. The &quot;NT&quot; was coined as &quot;New Technology&quot; since Windows was rewritten and ported to a native 32-bit architecture, and did not run on DOS. It added new features on top of Windows, such as multi-user support and preemptive multitasking. At this point, the TCP/IP stack was not yet included in Windows NT. Windows NT 3.5 Server (1994) included the TCP/IP stack and &quot;Winsock&quot; (Windows Socket API), along with FTP.</p>
+<p>Windows Server was conceived in the 1990s to compete with Unix and NetWare, which at the time dominated the business and server market. The first version of Windows NT was released as version 3.1 in 1993 as Server and Workstation flavours. The &quot;NT&quot; was coined as &quot;New Technology&quot; since Windows was rewritten and ported to a native 32-bit architecture, and did not run on DOS. It added new features on top of Windows, such as multi-user support and preemptive multitasking. At this point, only basic TCP/IP stack was included in Windows NT. Windows NT 3.5 Server (1994) included the complete TCP/IP stack and &quot;Winsock&quot; (Windows Socket API), along with FTP.</p>
 <p>The start menu interface of Windows 95 was added to Windows NT 4.0, and Windows 2000 introduced Active Directory. Windows NT became the only Windows architecture for consumers and businesses since Windows Server 2003 and Windows XP.</p>
 <h2 id="windows-server-usage">Windows Server Usage</h2>
-<p>Windows NT was not exclusive to the x86 architecture, as Server and Workstation versions were available for IBM PowerPC, HP PA-RISC (later renamed Intel Itanium), and other architectures. Most servers and mainframes did not use x86 architecture. The first Intel Xeon-branded products were released in 1998 as x86 microprocessors for servers and workstations.</p>
+<p>Windows NT was not exclusive to the x86 architecture, as Server and Workstation versions were available for IBM PowerPC, HP PA-RISC, MIPS, DEC Alpha, and other architectures (as well as Intel Itanium later on). In the 1990s, most servers and mainframes did not use x86 architecture. The first Intel Xeon-branded products were released in 1998 as x86 microprocessors for servers and workstations.</p>
 <p>The term &quot;Wintel&quot; refers to the partnership between Microsoft and Intel. Intel became the dominating motherboard and chipset manufacturer in the world, and the Microsoft partnership helped in establishing Windows on Intel x86 as de facto standard across the industry (see: <a data-from-md="" title="https://en.wikipedia.org/wiki/Wintel" href="https://en.wikipedia.org/wiki/Wintel">https://en.wikipedia.org/wiki/Wintel</a>). This extended&nbsp;into server markets; however, Windows Server usage varies depending on specific use case. Windows Server has less than 10% market share in internet-facing services (see <a data-from-md="" title="https://w3techs.com/technologies/overview/operating_system" href="https://w3techs.com/technologies/overview/operating_system">https://w3techs.com/technologies/overview/operating_system</a>), while it has 0% market share in mainframes and supercomputers. On the other hand, Windows Server dominates the SME market where many business applications are based on Windows. According to the &quot;Fortune Business Insights&quot; report from 2026 (<a data-from-md="" title="https://www.fortunebusinessinsights.com/server-operating-system-market-106601" href="https://www.fortunebusinessinsights.com/server-operating-system-market-106601">https://www.fortunebusinessinsights.com/server-operating-system-market-106601</a>), the overall share of Windows Server OS is around 22%.</p>
 <p>Windows Server is typically a requirement for businesses using the following applications:</p>
 <ul>
@@ -1127,20 +682,22 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 You can see a detailed comparison of Windows Server editions here: <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-server/get-started/editions-comparison?pivots=windows-server-2025" href="https://learn.microsoft.com/en-us/windows-server/get-started/editions-comparison?pivots=windows-server-2025">https://learn.microsoft.com/en-us/windows-server/get-started/editions-comparison?pivots=windows-server-2025</a></p>
 <p>The difference between the Standard Edition and Datacenter Edition licensing relevant to our course:</p>
 <ul>
-<li>The Standard Edition licence is limited to 1 host and 2 guest VMs</li>
+<li>The Standard Edition licence is limited to 1 physical host and 2 guest VMs</li>
 <li>The Datacenter Edition license allows 1 host and unlimited guest VMs</li>
 </ul>
 <h2 id="core-licensing">Core Licensing</h2>
-<p>Windows Server 2025 licenses are sold in 2-core packs. A Standard license covers 16 cores minimum (8 x 2-core packs). Servers with more than 16 cores require additional 2-core packs. Datacenter licensing becomes cost-effective when running more than 8 VMs per physical host. The Server 2025 licenses can be stacked in the same system. As an example, a server with 32 CPU cores will require two Server 2025 licenses.</p>
+<p>Windows Server 2025 licenses are sold in 2-core packs. A Standard license covers 16 cores minimum (8 x 2-core packs). Servers with more than 16 cores require additional 2-core packs. Datacenter licensing becomes cost-effective when running more than 8 VMs per physical host. The Server 2025 licenses can be stacked in the same system. As an example, a server with 32 physical CPU cores can stack two Windows Server 2025 licenses.</p>
 <h2 id="client-access-license-cal-and-requirements">Client Access License (CAL) and Requirements</h2>
 <p>Windows Server 2025 requires CALs for every user or device accessing the server, regardless of whether the server runs on-premises or in a public cloud (Azure, AWS). CALs are not checked by the system but are legally required and enforced during Microsoft audits. Microsoft audits can result in significant penalties. Ensure all user accounts accessing Windows Servers have appropriate CAL coverage.</p>
 <p>User CALs are named users accessing from any device. This is for remote workers or a mobile workforce that may log in from different devices. Device CALs are for shared workstations or kiosks. Multiple users can log in and work from the same device.</p>
 <p>CAL version must match or exceed the server operating system version. This is known as the &quot;downgrade right&quot;. You can run older server OS versions with newer CALs, but not vice versa. When migrating to new versions, you are required to repurchase all CALs and licences for the new version of Windows Server.</p>
-<p>Microsoft 365 E3 and E5 licenses include Windows Server CALs for any server OS version. This means:</p>
+<p>Microsoft 365 E3 and E5 licenses include Windows Server CAL-equivalent rights for any server OS version. This means:</p>
 <ul>
-<li>M365 E3/E5 users: No separate Windows Server CALs required for those user accounts</li>
+<li>M365 E3/E5 users: No separate Windows Server CALs required for those user accounts for the duration of the subscription</li>
 <li>Non-M365 users: Require traditional Windows Server User CALs</li>
+<li>The limitations for M365 are that RDS, and Microsoft SQL CALs that are not included</li>
 </ul>
+<p>For detailed information refer to the <a data-from-md="" title="https://www.microsoft.com/licensing/guidance/Windows-Server-2025" href="https://www.microsoft.com/licensing/guidance/Windows-Server-2025">Microsoft Windows Server 2025 Licensing Resources and Documents</a>.</p>
 <h1 id="windows-server-roles">Windows Server Roles</h1>
 <p>Typical Windows Server roles include:</p>
 <ul>
@@ -1156,7 +713,7 @@ You can see a detailed comparison of Windows Server editions here: <a data-from-
 <h1 id="directory-service">Directory Service</h1>
 <p>See: <a data-from-md="" title="https://en.wikipedia.org/wiki/Directory_service" href="https://en.wikipedia.org/wiki/Directory_service">https://en.wikipedia.org/wiki/Directory_service</a><br/>
 source: <a data-from-md="" title="https://www.loginradius.com/glossary/directory-service" href="https://www.loginradius.com/glossary/directory-service">https://www.loginradius.com/glossary/directory-service</a></p>
-<p>A Directory Service is software that manages the storage, retrieval, and organization of network resources and user information using a hierarchical tree structure. Directory services use the LDAP protocol (Lightweight Directory Access Protocol) for querying and modifying directory entries. Major directory services include Microsoft Active Directory (Windows domain environments), OpenLDAP (open-source), and Azure Active Directory (cloud-based). Directory services are the foundation of enterprise IAM, providing centralized user management, authentication, and authorization.</p>
+<p>A Directory Service is software that manages the storage, retrieval, and organization of network resources and user information using a hierarchical tree structure. In general, most directory services use the LDAP protocol (Lightweight Directory Access Protocol) for querying and modifying directory entries. Major directory services include Microsoft Active Directory (Windows domain environments), OpenLDAP (open-source), and Microsoft Entra ID (formerly Azure Active Directory, cloud-based). Directory services are the foundation of enterprise IAM, providing centralized user management, authentication, and authorization.</p>
 <p>Directory Service functions:</p>
 <ul>
 <li>Storage: Hierarchical database for users, groups, devices, OUs</li>
@@ -1168,21 +725,28 @@ source: <a data-from-md="" title="https://www.loginradius.com/glossary/directory
 <p>Source: <a data-from-md="" title="https://en.wikipedia.org/wiki/Windows_domain" href="https://en.wikipedia.org/wiki/Windows_domain">https://en.wikipedia.org/wiki/Windows_domain</a></p>
 <p>A Windows domain is a form of a computer network in which all user accounts, computers, printers and other security principals are registered with a central database located on one or more clusters of central computers known as domain controllers. Each person who uses computers within a domain receives a unique user account that can then be assigned access to resources within the domain. The concept of a Windows domain is in contrast with that of a workgroup in which each computer maintains its own database of security principals. A domain is a logical grouping of computers.</p>
 <p>In a Windows domain, the directory resides on computers that are configured as domain controllers. A domain controller is a Windows server (or Linux/Unix with Samba server) that manages all security-related aspects between user and domain interactions, centralizing security and administration.</p>
-<h2 id="active-directory">Active Directory</h2>
-<p>In the original Windows Server Domain system (shipped with Windows NT 3.x/4), machines could only be viewed in two states from the administration tools: computers detected (on the network), and computers that actually belonged to the domain. Active Directory makes it easier for administrators to manage and deploy network changes and policies via Group Policy to all of the machines connected to the domain.</p>
-<p>The AD communications are based on the LDAPv3 (RFC 2251 and 4510) protocol. However, AD differs from the standard LDAP in several ways, making it a proprietary protocol. Some of the changes and differences are:</p>
+<h2 id="active-directory-vs-generic-ldap-directory-implementations">Active Directory vs Generic LDAP Directory Implementations</h2>
+<p>In Windows NT domains (NT 3.x and NT 4.0), administration focused primarily on users, groups, and computer accounts within individual domains. Active Directory introduced a hierarchical directory structure with organizational units (OUs), forests, trusts, and Group Policy, making large-scale administration significantly easier.</p>
+<p>LDAP is a standard communications protocol for providing directory services. Some AD communication is based on the LDAPv3 (RFC 2251 and later RFC 4510) protocol; however, Microsoft extended AD with Microsoft-specific schema extensions, security models, protocols, and management features, making Active Directory a Microsoft-specific implementation rather than a generic LDAP directory service. Some of the changes and differences are:</p>
 <ul>
-<li>Active Directory uses SIDs (Security Identifiers) vs. Distinguished Names in LDAP</li>
-<li>AD uses LDAP for directory lookups and Kerberos for Authentication (LDAP can use multiple methods)</li>
-<li>AD has &quot;Domains&quot;, &quot;Forests&quot;, and &quot;Trusts&quot;, meaning it can create trust relationships between multiple domains (LDAP usually has only one domain)
+<li>Active Directory uses LDAP Distinguished Names (DNs) like other LDAP directories, but also assigns Windows Security Identifiers (SIDs) to security principals such as users, groups, and computers.</li>
+<li>AD uses other protocols for many of its functions:
 <ul>
-<li>AD can search the entire &quot;forest&quot; (Global Catalogue), while LDAP can only search within its domains individually</li>
+<li>LDAP/LDAPS for directory access</li>
+<li>Kerberos for authentication</li>
+<li>DNS for service location</li>
+<li>SMB and RPC for various directory functions and replication activities</li>
 </ul>
 </li>
-<li>AD has a multi-master replication architecture vs. LDAP with one master and read-replicas model</li>
-<li>AD has DNS integration, so it can centrally manage names, vs. LDAP uses external DNS servers.
+<li>AD has &quot;Domains&quot;, &quot;Forests&quot;, and &quot;Trusts&quot;, meaning it can create trust relationships between multiple domains
 <ul>
-<li>AD has a tightly-coupled relationship with DNS, meaning AD will not function without DNS</li>
+<li>Active Directory provides a Global Catalog service that enables directory searches across the entire forest. Similar capabilities may exist in other LDAP directory implementations, but they are implementation-specific and not defined by LDAP itself.</li>
+</ul>
+</li>
+<li>AD has a multi-master replication architecture. Other LDAP directory implementations may also support multi-master replication, depending on the specific product and configuration.</li>
+<li>Active Directory is tightly integrated with DNS and uses DNS SRV records for locating domain controllers and directory services. Other LDAP implementations may also integrate with DNS, but the dependency is typically less extensive.
+<ul>
+<li>Active Directory depends heavily on DNS for domain controller discovery, authentication, replication, and service location. A properly functioning AD environment requires correctly configured DNS services.</li>
 </ul>
 </li>
 <li>Group Policies are a Microsoft creation. Group Policy features include:
@@ -1196,18 +760,18 @@ source: <a data-from-md="" title="https://www.loginradius.com/glossary/directory
 </li>
 <li>AD has extended the directory database schema with hundreds of Windows-specific attributes.
 <ul>
-<li>This also means AD has extended Windows ACL integrations, while LDAP has comparatively simple ACLs.</li>
+<li>AD integrates directly with the Windows security model, including SIDs, access tokens, and NTFS permissions.</li>
+<li>Other LDAP directory products implement their own access-control mechanisms that may differ significantly from Windows ACLs.</li>
 </ul>
 </li>
 </ul>
-<p>In summary, AD provides many tools needed for an enterprise to manage users, systems, resources and configurations centrally, including Authentication and Authorization.</p>
-<p>Please Note: Windows AD does not natively support Accounting. Windows Active Directory does not record any detailed access and resource usage and must be combined with other tools such as Microsoft Sentinel or 3rd party products. SMEs who use Microsoft Windows Server and AD often completely forgo accounting; however, that may not be an option in industries where accounting is required as part of compliance mandates.</p>
+<p>AD provides many tools for enterprises to manage users, systems, resources and configurations centrally, including Authentication and Authorization. Active Directory provides authentication logs, security auditing, and event records, but it is not considered a complete AAA accounting solution. Organizations that require detailed tracking of resource usage, privileged activity, or compliance reporting often supplement Active Directory with SIEM platforms such as Microsoft Sentinel or third-party auditing products. SMEs that use Microsoft Windows Server and AD often forgo accounting. Lack of Accounting may not be an option in industries where it is mandated as part of compliance requirements. Examples of Network Accounting systems include RADIUS accounting, TACACS+ accounting, SIEM platforms, and specialized privileged-access monitoring solutions.</p>
 <h3 id="terminology">Terminology:</h3>
 <p><strong>Authentication</strong> is establishing a reasonable level of confidence that the entity is who or what it claims to be.<br/>
 <strong>Authorization</strong> is the granting of permission to perform tasks or access resources based on one or more attributes of the entity requesting authorization<br/>
 <strong>Accounting</strong> is the process of tracking, recording, and auditing user activities and system resource usage to ensure accountability and support security monitoring.<br/>
 <strong>Auditing</strong> is a highly detailed account of the level of specifically what was accessed, when, and the results of the access.</p>
-<p><sub class="jop-noMdConv">14/08/2026 16:20</sub></p>
+<p><sub class="jop-noMdConv">v1.0 2026-08-24</sub></p>
 </div></div>
 					</body>
 				</html>
