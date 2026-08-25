@@ -651,6 +651,18 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 <li>Online Responder</li>
 <li>Certificates</li>
 </ul>
+<p>Common uses for CS includes:</p>
+<ol>
+<li>Securing authentication: for example to enable smart-card, device, or VPN authentication</li>
+<li>HTTP/TLS certificates: used for internal and external facing applications that use HTTPS</li>
+<li>Data encryption: such as S/MIME (email encryption), encrypting files (EFS), and TLS communications</li>
+<li>Active Directory Security: AD Federation Services, Windows Hello for business, remote desktop services, always-on VPN, etc.</li>
+<li><a data-from-md="" title="https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/code-signing-options" href="https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/code-signing-options">Code Signing</a>: for internal applications and development</li>
+</ol>
+<h3 id="microsoft-code-signing-requirements">Microsoft Code Signing Requirements</h3>
+<p>On Windows, Microsoft requires kernel-mode drivers to comply with <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-hardware/drivers/install/kernel-mode-code-signing-requirements--windows-vista-and-later-" href="https://learn.microsoft.com/en-us/windows-hardware/drivers/install/kernel-mode-code-signing-requirements--windows-vista-and-later-">Microsoft&apos;s Kernel-Mode Code Signing Requirements</a>. Modern versions of Windows generally will not load newly released kernel-mode drivers unless they have been signed through Microsoft&apos;s driver-signing process. However, Windows 11 does not require all other applications to be code-signed. Unsigned executables can still run, although they may trigger SmartScreen warnings and &quot;Unknown Publisher&quot; prompts.</p>
+<p>Some organizations develop software solely for internal use, while others distribute software to external customers. For public distribution on Windows, developers may choose to publish through the Microsoft Store or sign their software using certificates issued by trusted certificate authorities. Organizations may also use Microsoft&apos;s cloud-based signing services or manage their own code-signing infrastructure. For trusted CA signing, the current options for developers are to purchase and maintain an HSM (Hardware Security Module) on site for local code signing, or use cloud services for signing their code, which may have limits or incur additional costs for each issued signature.</p>
+<p>Active Directory Certificate Services (AD CS) can provide a cost-effective solution for issuing code-signing certificates used for development, testing, and deployment of internally distributed applications, scripts, and other software. An internal CA allows organizations to establish trust within their own environment without relying on external certificate providers. However, certificates issued by an internal CA are generally trusted only within the organization and are not suitable by themselves for public software distribution.</p>
 <h2 id="certificate-authority">Certificate Authority</h2>
 <p>A Certificate Authority is a trusted entity that issues certificates to individuals, computers, organizations or services. The certificates are used to verify identity and other attributes of the certificate subject to other entities.</p>
 <p>Public or Private CAs could be used when implementing PKI. Public CAs can be trusted globally and by external systems and over the internet, while a Private CA is not going to be trusted outside of the systems that explicitly add the Private CA certificate to their root store.</p>
@@ -686,7 +698,7 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 <li>Certificate Revocation Lists (CRL)</li>
 </ul>
 <p>In both of these methods, the client checks to make sure that a certificate is NOT revoked. The revocation information is never pushed to the clients. Many operating systems, browsers, and applications have historically used soft-fail (fail open) revocation checking in some situations, meaning a connectivity failure to an OCSP responder or CRLs distribution point may not automatically invalidate a certificate and allow access. However, this behavior is implementation-specific and can be configured differently within some policies.</p>
-<p><sub class="jop-noMdConv">v1.0 2026-08-24</sub></p>
+<p><sub class="jop-noMdConv">v1.1 2026-08-25</sub></p>
 </div></div>
 					</body>
 				</html>
