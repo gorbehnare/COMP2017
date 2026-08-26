@@ -11,4 +11,4 @@
 - [Lab Environment Overview](./labs/Lab%2000%20-%20Lab%20Environment%20Overview.html)
 - [Lab 01 - Creating Virtual Lab Environment and PDC](./labs/Lab%2001%20-%20Creating%20The%20Lab%20Environment%20and%20PDC.html)
 - [Lab 02 - Windows Hosts](./labs/Lab%2002%20-%20Windows%20Hosts.html)
-
+- [Lab 03 - Managing Domain Controllers](./labs/Lab%2003%20-%20Managing%20Domain%20Controllers.html)
