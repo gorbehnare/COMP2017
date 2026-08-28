@@ -13,3 +13,4 @@
 - [Lab 02 - Windows Hosts](./labs/Lab%2002%20-%20Windows%20Hosts.html)
 - [Lab 03 - Managing Domain Controllers](./labs/Lab%2003%20-%20Managing%20Domain%20Controllers.html)
 - [Lab 04 - AD Certificate Services](./labs/Lab%2004%20-%20AD%20Certificate%20Services.html)
+- [Lab 05 - Managing AD Objects & Service Accounts](./labs/Lab%2005%20-%20Managing%20AD%20Objects%20&%20Service%20Accounts.html)
