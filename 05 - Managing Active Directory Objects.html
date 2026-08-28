@@ -659,23 +659,6 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 <li>Group memberships.</li>
 </ul>
 <p>The username and password of a user account serve as the user&rsquo;s sign-in credentials. A user object also includes several other attributes that describe and manage the user.</p>
-<h2 id="managed-service-accounts">Managed Service Accounts</h2>
-<p>Usually when software is installed on a host, it uses local accounts to execute and manage the associated Windows services. However, if centralized management is required, then Windows Server supports an AD DS object named managed service account, which is used to facilitate service-account management. A managed service account is an AD DS object class that enables:</p>
-<ul>
-<li>Simplified password management.</li>
-<li>Simplified SPN management.</li>
-</ul>
-<p>There are typical challenges associated with using managed service accounts:</p>
-<ul>
-<li>Extra administrative overhead of creating and managing these accounts, including overheads regarding management of the service principal name (SPN)
-<ul>
-<li>SPNs are the unique IDs that are used to locate the correct account in the AD DS database during the Kerberos authentication process</li>
-</ul>
-</li>
-<li>Efforts to safeguard and use credentials for such accounts when deploying software to destination hosts</li>
-</ul>
-<h2 id="group-managed-service-accounts">Group Managed Service Accounts</h2>
-<p>Group managed service accounts enable the capabilities of standard managed service accounts to be extended to more than one server in a domain. Multiple servers can be configured to use the same accounts to simplify and reduce administration overhead.</p>
 <h2 id="group-objects">Group Objects</h2>
 <p>Groups are used to simplify management of permissions and access controls for users and enable bulk management of permissions. There are two types of group objects:</p>
 <ul>
@@ -688,6 +671,37 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 <li>Domain-local: assign abilities and permissions on all computers in the local domain.</li>
 <li>Global: assign abilities and permissions anywhere in the forest, but their membership is generally limited to accounts and other global groups from the same domain.</li>
 <li>Universal: used in multi-domain networks, assigns abilities and permissions anywhere in the forest, while the member can be from anywhere in the AD DS forest.</li>
+</ul>
+<h2 id="managed-service-accounts-msa">Managed Service Accounts (MSA)</h2>
+<p>Usually when software is installed on a host, it uses local user accounts to execute and manage the associated Windows services. Usually a regular user Account is created and the service is configured to use this user account to run. A regular user account used as a Service Account, requires manual credential management and maintenance (passwords are set manually). These Service Accounts can be a local user, domain user, or built-in or virtual user account.</p>
+<p>If centralized management of Service Accounts is required, then Windows Server supports an AD DS object named Managed Service Account (MSA). An MSA is an AD DS object class that enables:</p>
+<ul>
+<li>Automatically sets and periodically renews passwords</li>
+<li>Automatically generates and manages SPN
+<ul>
+<li>SPNs are the unique IDs that are used to locate the correct account in the AD DS database during the Kerberos authentication process</li>
+</ul>
+</li>
+</ul>
+<p>MSA can only be used on a single server.</p>
+<h2 id="group-managed-service-accounts-gmsa">Group Managed Service Accounts (gMSA)</h2>
+<p>Group managed service accounts enable the capabilities of standard MSA to be extended to more than one server in a domain. Multiple servers can be placed in a group that can be configured to use the same accounts to simplify and reduce administration overhead of using MSA.</p>
+<ul>
+<li>gMSAs support:
+<ul>
+<li>Multiple servers</li>
+<li>Automatic password management</li>
+<li>Simplified SPN management</li>
+<li>Delegated administration</li>
+</ul>
+</li>
+<li>gMSAs are commonly used in:
+<ul>
+<li>Server farms</li>
+<li>Load-balanced applications</li>
+<li>Multi-server applications requiring a shared identity.</li>
+</ul>
+</li>
 </ul>
 <h2 id="computer-objects">Computer Objects</h2>
 <p>Computer objects are security principals in AD DS that:</p>
@@ -745,7 +759,7 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 <p>The <code class="inline-code">dsadd</code> command-line tool is a legacy Windows utility used to add specific objects (users, groups, computers, OUs, contacts, quotas) to Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS). It is included by default with the AD DS role and can be installed in client systems using Remote Server Administration Tools (RSAT).  While it may still be functional in Windows Server 2025, <code class="inline-code">dsadd</code> is considered a legacy tool. Microsoft recommends using the Active Directory module for Windows PowerShell or Windows Admin Center instead.</p>
 <p>Syntax: <code class="inline-code">dsadd &lt;object_type&gt; &lt;DistinguishedName&gt; [options]</code><br/>
 Example: <code class="inline-code">dsadd user &quot;CN=John Doe,CN=Users,DC=corp,DC=com&quot; -samid jdoe -pwd P@ssw0rd</code></p>
-<p><sub class="jop-noMdConv">v1.0 2026-08-21</sub></p>
+<p><sub class="jop-noMdConv">v1.0.1 2026-08-28</sub></p>
 </div></div>
 					</body>
 				</html>
