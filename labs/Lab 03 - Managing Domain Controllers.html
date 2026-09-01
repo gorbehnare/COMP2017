@@ -744,6 +744,7 @@ As a matter of recommended best practices, every Active Directory domain environ
 </ul>
 <h1 id="seizing-operations-masters-back-to-dc1">Seizing Operations Masters Back to <code class="inline-code">DC1</code></h1>
 <p>In this exercise, instead of transferring the Operations Master, you will seize the Operations Masters and move them to another domain controller. It is always preferable to transfer roles instead of seizing roles. Transferring roles is done when the current operations masters are available. Seizing a role is done when the operations masters are unavailable for a lengthy period of time, or in case of unplanned downtime.</p>
+<p>In this example, we are using <code class="inline-code">ntdsutil</code>, which is considered a legacy tool. It is still included in Windows Server 2025 but may be removed in the future. It is recommended that you use PowerShell of the GUI tools for these operations in a production environment. However since the <code class="inline-code">ntdsutil</code> tool has been around since 2000 and had been used for such a long time, it is being used for demonstrative purposes.</p>
 <p>Ensure all the commands you execute complete successfully. Future assignments require that the system is restored as detailed in this challenge. <strong>Pay close attention to the computer names</strong> you use in the command lines.</p>
 <ul>
 <li>
@@ -776,7 +777,7 @@ As a matter of recommended best practices, every Active Directory domain environ
 <p>To seize the roles, at the fsmo maintenance prompt, type the following commands, clicking <strong>Yes</strong> each time you&rsquo;re prompted to confirm:</p>
 <ul>
 <li>
-<div class="joplin-editable"><pre class="joplin-source" hidden="" data-joplin-language="PowerShell" data-joplin-source-open="```PowerShell
+<div class="joplin-editable"><pre class="joplin-source" hidden="" data-joplin-language="powershell" data-joplin-source-open="```powershell
 " data-joplin-source-close="
 ```">  seize schema master
   seize naming master
@@ -840,7 +841,7 @@ As a matter of recommended best practices, every Active Directory domain environ
 <li>Screenshot of the Schema Operations master after the change to <code class="inline-code">TOR-2017-####</code>.</li>
 <li>One or more Screenshots showing the full output of  ALL FIVE COMMANDS to seize operations masters back to <code class="inline-code">DC1</code>.</li>
 </ol>
-<p><sub class="jop-noMdConv">v.1.0.1 2026-08-26</sub></p>
+<p><sub class="jop-noMdConv">v.1.0.2 2026-09-01</sub></p>
 </div></div>
 					</body>
 				</html>
