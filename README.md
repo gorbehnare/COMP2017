@@ -6,7 +6,9 @@
 - [04 - Active Directory Certificate Services](./04%20-%20Active%20Directory%20Certificate%20Services.html)
 - [05 - Managing Active Directory Objects](./05%20-%20Managing%20Active%20Directory%20Objects.html)
 - [06 - Authentication & Policies](./06%20-%20Authentication%20&%20Policies.html)
-- 07 -
+- [07 - AD Backup, Recovery, and Maintenance](./07%20-%20AD%20Backup,%20Recovery,%20and%20Maintenance.html)
+
+
 ## Assignments and Labs
 - [Lab Environment Overview](./labs/Lab%2000%20-%20Lab%20Environment%20Overview.html)
 - [Lab 01 - Creating Virtual Lab Environment and PDC](./labs/Lab%2001%20-%20Creating%20The%20Lab%20Environment%20and%20PDC.html)
