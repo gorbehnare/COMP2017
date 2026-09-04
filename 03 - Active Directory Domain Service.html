@@ -648,7 +648,7 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 <li>Directory services for AD DS-enabled applications</li>
 <li>Options for configuring security policies that apply to all users and computers, including management of user desktops and security settings (Group Policy)</li>
 </ul>
-<h1 id="communications-protocol">Communications Protocol</h1>
+<h1 id="communication-protocols">Communication Protocols</h1>
 <p>AD DS relies on several protocols for its functions:</p>
 <ul>
 <li>LDAP/LDAPS for directory access</li>
@@ -705,7 +705,7 @@ Authorization is the process of verifying that an authenticated user has permiss
 <ul>
 <li>Contains a copy of all AD DS objects in a forest that includes a subset of the attributes for each object</li>
 <li>Improves efficiency of object searches by avoiding unnecessary referrals to domain controllers</li>
-<li>is typically required for forest-wide logon processes, universal group membership evaluation, and UPN resolution.</li>
+<li>is typically required for forest-wide logon processes, universal group membership evaluation, and UPN (User Principal Name) resolution.</li>
 </ul>
 <p>For basic information, refer to Microsoft Learn article <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/planning-global-catalog-server-placement" href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/planning-global-catalog-server-placement">Domain Controller Roles - Global Catalog Server (Since Windows Server 2003)</a></p>
 <p>Microsoft recommendations on <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/planning-global-catalog-server-placement" href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/planning-global-catalog-server-placement">Planning Global Catalog Server Placement</a>:</p>
@@ -798,6 +798,9 @@ The trust is automatically enabled between all domains in the forest. Enterprise
 <h3 id="organizational-units-ou">Organizational Units (OU)</h3>
 <p>OUs are AD containers that can contain users, groups, computers, and other OUs. They are used to represent organizational hierarchy and/or administrative logical boundaries within a domain. This enables the objects within an OU to be managed consistently, and allows delegation of administrative privileges and application of policies along OUs as a logical partition within a domain.</p>
 <p>The obvious typical use case for an OU is an organization that has multiple departments, and each department manages its own IT. OU allows each departmental IT to manage their own OU. Another example is to have different groups of users within an organization that need special access or specific security configuration requirements that should not be applied to other users and groups. Placing all those users in an OU allows applying different configuration or privileges to their objects (users, computers, groups, etc.) while not affecting others.</p>
+<h3 id="partitions">Partitions</h3>
+<p>Also known as naming contexts, are logical, contiguous subtrees of the directory database that define specific scopes of replication and data organization.  Instead of replicating the entire database to every domain controller, AD DS divides data into distinct partitions so that each controller only holds the information necessary for its role, optimizing network traffic and administration.<br/>
+For more information see Microsoft Learn <a data-from-md="" title="https://learn.microsoft.com/en-us/windows/win32/ad/naming-contexts-and-partitions" href="https://learn.microsoft.com/en-us/windows/win32/ad/naming-contexts-and-partitions">Naming Contexts and Directory Partitions</a>.</p>
 <h1 id="trust">Trust</h1>
 <p>Trust provides a mechanism for users to gain access to resources in another domain. Trust is typically directional and flows from &quot;trusting&quot; to &quot;trusted&quot;. The &quot;trusting&quot; domain contains the resources, and allows the &quot;trusted&quot; domains to access those resources. The terms &quot;one-way&quot; or &quot;two-way&quot; are used to indicate the direction of trust.</p>
 <p>Additional terminology:</p>
@@ -825,7 +828,7 @@ The trust is automatically enabled between all domains in the forest. Enterprise
 <li><code class="inline-code">Printers</code>: used to simplify the process of locating and connecting to printers</li>
 <li><code class="inline-code">Shared folders</code>: enables users to search for shared folders</li>
 </ul>
-<p><sub class="jop-noMdConv">v1.0.1 2026-08-25</sub></p>
+<p><sub class="jop-noMdConv">v1.0.2 2026-09-04</sub></p>
 </div></div>
 					</body>
 				</html>
