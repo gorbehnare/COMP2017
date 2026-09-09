@@ -647,6 +647,58 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 <li>Exchange and Microsoft infrastructure</li>
 <li>Windows-based business applications</li>
 </ul>
+<h1 id="windows-server-2025">Windows Server 2025</h1>
+<p>The current version of Windows Server 2025 is based on Windows 11. Windows Server 2025 has the following new features and enhancements:</p>
+<ul>
+<li><strong>Server Flighting</strong> currently only applies to insider builds (preview versions of Windows) and adds the ability to upgrade an existing installation to a new release through Windows Updates, instead of a manual reinstall or upgrade install of the OS.
+<ul>
+<li>The &quot;flighting&quot; terminology is used by Microsoft to describe progressive rollout, previously applied to Windows 10 and 11 clients, but now applies to Server 2025 as well (see Microsoft Blog Post: <a data-from-md="" title="https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/welcome-to-windows-insider-flighting-on-windows-server/4040284" href="https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/welcome-to-windows-insider-flighting-on-windows-server/4040284">Welcome to Windows Insider flighting on Windows Server</a>)</li>
+</ul>
+</li>
+<li><strong>Pay-as-you-go subscription</strong> option. This requires an Azure subscription and Azure Arc management. See Microsoft Learn article <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-server/get-started/windows-server-pay-as-you-go?tabs=gui%2Cazureportal" href="https://learn.microsoft.com/en-us/windows-server/get-started/windows-server-pay-as-you-go?tabs=gui%2Cazureportal">Configure Windows Server Pay-as-you-go with Azure Arc</a>.</li>
+<li><strong>SMB over QUIC</strong> was introduced with Server 2022 Azure Edition, but is now available for all Server 2025 systems (Standard and Datacenter Editions). SMB over QUIC tunnels SMB traffic through a TLS 1.3-encrypted QUIC connection that runs over UDP, usually on port 443. See Microsoft Learn article <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-over-quic?tabs=windows-admin-center%2Cpowershell2%2Cwindows-admin-center1" href="https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-over-quic?tabs=windows-admin-center%2Cpowershell2%2Cwindows-admin-center1">SMB over QUIC</a>.
+<ul>
+<li>Additional context for SMB security:
+<ul>
+<li><code class="inline-code">SMB Encryption</code> (for data payload in transit) and <code class="inline-code">Pre-authentication Integrity</code> (for protecting session establishment) are separate security features.</li>
+<li>SMB 3.0 introduced SMB Encryption using AES-128 CCM, but encryption was optional and had to be enabled or required by policy.</li>
+<li>SMB 3.1.1 introduced mandatory pre-authentication integrity during negotiation, using SHA-512 hashing to protect the negotiation and session setup phases against tampering and man-in-the-middle attacks. AES-128 GCM (in addition to AES-128 CCM, and GCM is recommended) is available for end-to-end encryption for data transmission, but must be explicitly enabled and must be supported by the client.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Hotpatching</strong> is the process of applying software updates to code that is already running in memory, allowing security and quality fixes to take effect without requiring a system reboot.
+<ul>
+<li>Instead of replacing files and restarting the operating system to load updated code, hotpatching modifies the active code paths in memory. The primary goals are to reduce planned downtime, increase system availability, and improve security by enabling faster deployment of updates.</li>
+<li>Hotpatching requires Azure Arc and Virtualization-based Security (VBS/VSM) to be enabled.</li>
+</ul>
+</li>
+<li><strong>Windows Package Manager</strong> (<code class="inline-code">winget</code>) is included and supported out of the box.
+<ul>
+<li>The <code class="inline-code">winget</code> utility brings a Linux-style package management experience to Windows, allowing software to be installed, updated, and managed from the command line using a centralized package repository. However, <code class="inline-code">winget</code> does not include OS, libraries, drivers, and other core components. See Microsoft Learn article <a data-from-md="" title="https://learn.microsoft.com/en-us/windows/package-manager/winget/" href="https://learn.microsoft.com/en-us/windows/package-manager/winget/">Use WinGet to install and manage applications</a>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="the-microsoft-azure-arc">The Microsoft Azure Arc</h2>
+<p>Azure Arc is Microsoft&apos;s agent-based management platform (Similar to AWS Systems Manager and SSM Agent). It allows management of servers, Kubernetes clusters, databases, and other resources that run outside Azure as if they were Azure resources.</p>
+<p>The Azure Arc control plane is included with Azure accounts for free and includes:</p>
+<ul>
+<li>Registering Windows and Linux servers</li>
+<li>Viewing servers in the Azure portal</li>
+<li>Resource groups, tags, and RBAC (Role-Based Access Control)</li>
+<li>Azure Resource Graph inventory and querying</li>
+<li>Basic management capabilities</li>
+</ul>
+<p>Azure Arc becomes billable when you enable Azure services on top of Arc-connected servers, such as:</p>
+<ul>
+<li>Azure Update Manager</li>
+<li>Microsoft Defender for Cloud</li>
+<li>Azure Monitor / Log Analytics</li>
+<li>Microsoft Sentinel</li>
+<li>Azure Automation</li>
+<li>Azure Policy guest configuration (certain scenarios)</li>
+</ul>
+<p>In Windows Server 2025, Azure Arc enables hotpatching and Pay-as-you-go licensing for Windows Server Standard or Datacenter installations.</p>
 <h1 id="windows-server-2025-editions-and-licenses">Windows Server 2025 Editions and Licenses</h1>
 <p>Windows Server is a proprietary operating system and requires a license to use. Windows Server 2025 introduces updated licensing requirements that differ from previous versions. There are additional Client Access License (CAL) requirements, server license editions, and VM hosting limits that apply when migrating from Windows Server 2016/2019 to Server 2025.</p>
 <p>Windows Server 2025 license is offered in the following variants:</p>
@@ -771,7 +823,7 @@ source: <a data-from-md="" title="https://www.loginradius.com/glossary/directory
 <strong>Authorization</strong> is the granting of permission to perform tasks or access resources based on one or more attributes of the entity requesting authorization<br/>
 <strong>Accounting</strong> is the process of tracking, recording, and auditing user activities and system resource usage to ensure accountability and support security monitoring.<br/>
 <strong>Auditing</strong> is a highly detailed account of the level of specifically what was accessed, when, and the results of the access.</p>
-<p><sub class="jop-noMdConv">v1.0.1 2026-09-02</sub></p>
+<p><sub class="jop-noMdConv">v1.5.0 2026-09-09</sub></p>
 </div></div>
 					</body>
 				</html>
