@@ -7,6 +7,7 @@
 - [05 - Managing Active Directory Objects](./05%20-%20Managing%20Active%20Directory%20Objects.html)
 - [06 - Authentication & Policies](./06%20-%20Authentication%20&%20Policies.html)
 - [07 - AD Backup, Recovery, and Maintenance](./07%20-%20AD%20Backup,%20Recovery,%20and%20Maintenance.html)
+- [08 - Operations of Complex AD Environments](./08%20-%20Operations%20of%20Complex%20AD%20Environments.html)
 
 
 ## Assignments and Labs
