@@ -7,7 +7,7 @@
 - [05 - Managing Active Directory Objects](./05%20-%20Managing%20Active%20Directory%20Objects.html)
 - [06 - Authentication & Policies](./06%20-%20Authentication%20&%20Policies.html)
 - [07 - AD Backup, Recovery, and Maintenance](./07%20-%20AD%20Backup,%20Recovery,%20and%20Maintenance.html)
-- [08 - Operation of Complex AD Environments](./08%20-%20Operation%20of%20Complex%20AD%20Environments.html)
+- [08 - Operations of Complex AD Environments](./08%20-%20Operations%20of%20Complex%20AD%20Environments.html)
 
 
 ## Assignments and Labs
@@ -16,4 +16,4 @@
 - [Lab 02 - Windows Hosts](./labs/Lab%2002%20-%20Windows%20Hosts.html)
 - [Lab 03 - Managing Domain Controllers](./labs/Lab%2003%20-%20Managing%20Domain%20Controllers.html)
 - [Lab 04 - AD Certificate Services](./labs/Lab%2004%20-%20AD%20Certificate%20Services.html)
-- [Lab 05 - Managing AD Objects & Service Accounts](./labs/Lab%2005%20-%20Managing%20AD%20Objects%20&%20Service%20Accounts.html)
+- [Lab 05 - Managing AD Objects & Accounts](./labs/Lab%2005%20-%20Managing%20AD%20Objects%20&%20Accounts.html)
