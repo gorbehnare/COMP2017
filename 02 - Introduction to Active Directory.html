@@ -752,7 +752,57 @@ List of provided services and tools:</li>
 <li>Development and testing environments requiring an LDAP directory service</li>
 </ul>
 <p>AD LDS does not contain the same information as AD DS by default. Instead, it stores application-specific objects defined by its schema and the requirements of the applications that use it. The directory data can include users, groups, application settings, devices, or other custom objects, depending on how the AD LDS instance is designed and configured.</p>
-<p><sub class="jop-noMdConv">v1.0 2026-08-24</sub></p>
+<h1 id="active-directory-vs-workgroup-for-sme">Active Directory vs. Workgroup for SME</h1>
+<p>For small networks such as small businesses with less than 15~20 computers and home users, installing a directory service for centralized management may seem too costly. As an IT technician, you may be in a position to choose between various solutions for your customer.</p>
+<p>Some of the costs associated with Windows AD implementation are:</p>
+<ul>
+<li>Windows AD requires a server (or Enterprise Cloud subscription)
+<ul>
+<li>Costs of the physical server, Windows Server software licensing, and CALs</li>
+<li>Configuring, administering, and maintaining the systems (via contractors or staff)</li>
+<li>Windows clients must support joining a domain (only Pro and Enterprise versions of Windows can join a domain; Windows Home editions cannot)</li>
+</ul>
+</li>
+</ul>
+<p>On the other hand, Active Directory services provide:</p>
+<ul>
+<li>Centralized management of users, clients, and configurations, including security
+<ul>
+<li>Centralized authentication and authorization</li>
+<li>Single Sign-On (SSO)</li>
+<li>Centralized Administration and Auditing</li>
+</ul>
+</li>
+<li>Can scale to hundreds of thousands of users and systems</li>
+</ul>
+<h2 id="windows-workgroup">Windows Workgroup</h2>
+<p>A workgroup is a Microsoft-specific methodology for organizing peer-to-peer systems on a local network. The workgroup concept originated with Windows for Workgroups 3.1 (1992) and continued through later Windows operating systems, including the Windows NT family. Windows 7 introduced HomeGroup, a separate simplified file-sharing feature for home networks. HomeGroup did not replace Workgroups and was removed from Windows 10 beginning with version 1803.</p>
+<p>Workgroup characteristics are:</p>
+<ul>
+<li>Is available on any Windows client OS, including Home editions</li>
+<li>Allows easy file and printer sharing over a local network</li>
+<li>Peer-to-peer network:
+<ul>
+<li>It is managed based on local user accounts on each PC (no centralized authentication)</li>
+<li>Each computer manages its own security settings, including for every shared resource</li>
+<li>Simpler to set up but harder to manage as the number of computers grows</li>
+<li>If authentication is required, users need separate accounts on different computers, possibly with the same usernames and passwords.</li>
+</ul>
+</li>
+<li>Intended to work within a single local network
+<ul>
+<li>May use VPN and overlay networks to extend access; however, exposing SMB to untrusted networks can introduce significant security risks
+<ul>
+<li>For example, SMB relay attacks may be possible when SMB signing is not enforced, allowing an attacker to relay authentication traffic to another system even when SMB encryption is enabled</li>
+<li>SMB is tightly integrated into Windows infrastructure, and severe SMB vulnerabilities have historically enabled remote code execution, privilege escalation, ransomware propagation, and lateral movement across networks</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>As mentioned previously, Microsoft is not the only provider of the SMB/CIFS protocol, as many non-Microsoft systems can share files and printers via third-party software (such as the SAMBA server). Most small business network appliances (NAS, network printers, etc.) do not run Microsoft software.</p>
+<p>The upper limit for the number of inbound SMB connections to the same system in a workgroup used to be 10 in Windows XP; however, later Windows versions can handle about 20 connections at a time.  This imposes a limit on the number of computers that can be actively accessing a single resource.</p>
+<p><sub class="jop-noMdConv">v1.5 2026-09-16</sub></p>
 </div></div>
 					</body>
 				</html>
