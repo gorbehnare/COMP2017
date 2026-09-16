@@ -800,9 +800,9 @@ List of provided services and tools:</li>
 </ul>
 </li>
 </ul>
-<p>As mentioned previously, Microsoft is not the only provider of the SMB/CIFS protocol, as many non-Microsoft systems can share files and printers via third-party software (such as the SAMBA server). Most small business network appliances (NAS, network printers, etc.) do not run Microsoft software.</p>
-<p>The upper limit for the number of inbound SMB connections to the same system in a workgroup used to be 10 in Windows XP; however, later Windows versions can handle about 20 connections at a time.  This imposes a limit on the number of computers that can be actively accessing a single resource.</p>
-<p><sub class="jop-noMdConv">v1.5 2026-09-16</sub></p>
+<p>The upper limit for the number of inbound SMB connections to a Windows client in a workgroup used to be 10 in Windows XP; however, later Windows versions can handle about 20 connections at a time. This imposes a limit on the number of computers that can be actively accessing a single resource when that resource is shared from Windows client OS, as a single client can establish more than one SMB connections at a time. This concurrent connection limitation only applies to Windows client and not Windows Server.</p>
+<p>As mentioned previously, Microsoft is not the only provider of the SMB/CIFS protocol, as many non-Microsoft systems can share files and printers via third-party software (such as the Samba server). Most small business network appliances (NAS, network printers, etc.) do not run Microsoft software. Other systems may not have the same limitations as Windows client in handling incoming SMB shares. Refer to the vendor&apos;s technical specifications for any concurrent connection limits and performance characteristics before choosing a network appliance.</p>
+<p><sub class="jop-noMdConv">v1.6 2026-09-16</sub></p>
 </div></div>
 					</body>
 				</html>
