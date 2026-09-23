@@ -10,7 +10,7 @@
 - [08 - Group Policy](./08%20-%20Group%20Policy.html)
 - [09 - Operation of Complex AD Environments](./09%20-%20Operation%20of%20Complex%20AD%20Environments.html)
 - [10 - Microsoft Entra ID](./10%20-%20Microsoft%20Entra%20ID.html)
-- 11 - VPN Protocols
+- [11 - VPN Protocols](./11%20-%20VPN%20Protocols.html)
 - 12 - File Sharing
 
 ## Assignments and Labs
