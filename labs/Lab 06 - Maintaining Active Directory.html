@@ -590,6 +590,123 @@ hue-6-2: #c18401
 					content:"\f0c8";
 				}
 
+				.fountain {
+					font-family: monospace;
+					line-height: 107%;
+					max-width: 1000px;
+					margin-left: auto;
+					margin-right: auto;
+				}
+
+				.fountain .title-page,
+				.fountain .page {
+					padding: 1em 2em;
+					margin-bottom: 2em;
+				}
+
+				.fountain .title-page {
+					border-bottom: 1px solid #dddddd;
+				}
+
+				@media print {
+					.fountain .title-page,
+					.fountain .page {
+						page-break-after: always;
+					}
+
+					.fountain .title-page {
+						border-bottom: none;
+					}
+				}
+
+				.fountain hr {
+					border: none;
+					border-top: 1px solid #dddddd;
+					margin: 2em 0;
+				}
+
+				.fountain h1,
+				.fountain h2,
+				.fountain h3,
+				.fountain h4,
+				.fountain p {
+					font-weight: normal;
+					line-height: 107%;
+					margin: 1em 0;
+					border: none;
+					font-size: 1em;
+				}
+
+				.fountain .bold {
+					font-weight: bold;
+				}
+
+				.fountain .italic {
+					font-style: italic;
+				}
+
+				.fountain .underline {
+					text-decoration: underline;
+				}
+
+				.fountain .centered {
+					text-align: center;
+				}
+
+				.fountain h2 {
+					text-align: right;
+				}
+
+				.fountain .dialogue p.parenthetical {
+					margin-left: 11%;
+				}
+
+				.fountain .title-page .credit,
+				.fountain .title-page .authors,
+				.fountain .title-page .source {
+					text-align: center;
+				}
+
+				.fountain .title-page h1 {
+					margin-bottom: 1.5em;
+					text-align: center;
+				}
+
+				.fountain .title-page .source {
+					margin-top: 1.5em;
+				}
+
+				.fountain .title-page .notes {
+					text-align: right;
+					margin: 3em 0;
+				}
+
+				.fountain .title-page h1 {
+					margin-bottom: 1.5em;
+					text-align: center;
+				}
+
+				.fountain .dialogue {
+					margin-left: 3em;
+					margin-right: 3em;
+					margin-bottom: 1em;
+				}
+
+				.fountain .dialogue p,
+				.fountain .dialogue h1,
+				.fountain .dialogue h2,
+				.fountain .dialogue h3,
+				.fountain .dialogue h4 {
+					margin: 0;
+				}
+
+				.fountain .dialogue h1,
+				.fountain .dialogue h2,
+				.fountain .dialogue h3,
+				.fountain .dialogue h4 {
+					text-align: center;
+				}
+
 				.abc-notation-block svg {
 					background-color: white;
 				}
@@ -868,12 +985,12 @@ As a system administrator, it is important to have good backups. In this lab cha
 <h1 id="submission-and-grading">Submission and Grading</h1>
 <p>Please follow instructions in Blackboard regarding grades and submission. By the end of this lab, you should have the following screenshots:</p>
 <ol>
-<li>A full window <strong>SCREENSHOT</strong> of the <code class="inline-code">Deleted Objects</code>, showing the <code class="inline-code">Abbie Parsons</code> user object listed.</li>
-<li>a full window <strong>SCREENSHOT</strong> of the <code class="inline-code">Active Directory Sites and Services</code> showing the connection from <code class="inline-code">SVR1-2017-####</code> under <code class="inline-code">NTDS Settings</code>.</li>
-<li>A full window <strong>SCREENSHOT</strong> of the completed back up progress. It should have the correct backup location and completed transfer.</li>
-<li>A full window <strong>SCREENSHOT</strong> of the completed recovery progress.</li>
+<li>A full window screenshot of the <code class="inline-code">Deleted Objects</code>, showing the <code class="inline-code">Abbie Parsons</code> user object listed.</li>
+<li>A full window screenshot of the <code class="inline-code">Active Directory Sites and Services</code> showing the connection from <code class="inline-code">SVR1-2017-####</code> under <code class="inline-code">NTDS Settings</code>.</li>
+<li>A full-window screenshot of the completed backup progress. It should show the correct backup location and the completed transfer.</li>
+<li>A full window screenshot of the completed recovery progress.</li>
 </ol>
-<p><sub class="jop-noMdConv">v1.0.0 2026-09-28</sub></p>
+<p><sub class="jop-noMdConv">v1.0.1 2026-09-28</sub></p>
 </div></div>
 					</body>
 				</html>
