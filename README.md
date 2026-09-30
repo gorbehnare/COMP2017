@@ -9,9 +9,10 @@
 - [07 - AD Backup, Recovery, and Maintenance](./07%20-%20AD%20Backup,%20Recovery,%20and%20Maintenance.html)
 - [08 - Group Policy](./08%20-%20Group%20Policy.html)
 - [09 - Operation of Complex AD Environments](./09%20-%20Operation%20of%20Complex%20AD%20Environments.html)
-- [10 - Microsoft Entra ID](./10%20-%20Microsoft%20Entra%20ID.html)
-- [11 - VPN Protocols](./11%20-%20VPN%20Protocols.html)
-- [12 - Access Control](./12%20-%20Access%20Control.html)
+- [10 - Access Control](./10%20-%20Access%20Control.html)
+- [11 - Microsoft Entra ID](./11%20-%20Microsoft%20Entra%20ID.html)
+- [12 - VPN Protocols](./12%20-%20VPN%20Protocols.html)
+
 
 ## Assignments and Labs
 - [Lab Environment Overview](./labs/Lab%2000%20-%20Lab%20Environment%20Overview.html)
