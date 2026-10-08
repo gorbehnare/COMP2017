@@ -830,33 +830,6 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 - Delegated Managed Service Accounts (dMSAs) in Windows Server 2025</p>
 <p>A Kerberos-enabled service will be running under a principal (Service Account) that has the SPN defined in its attribute. Any service can look up the SPN for another service. When a service wants to authenticate to another service, it uses that service&apos;s SPN to differentiate it from all of the other services running on that computer.</p>
 <p>As has been discussed in previous topics, if a service account were simply a user account with a human-generated password, then that account would be more vulnerable to an offline dictionary attack. From a security standpoint, setting an SPN on a principal being used as a service account is as important as creating that account.</p>
-<h2 id="delegated-managed-service-accounts-dmsa">Delegated Managed Service Accounts (dMSA)</h2>
-<p>As a review from previous content:</p>
-<ul>
-<li>Service Accounts were regular user accounts (local, domain, or built-in accounts) that were used to run a service. The credentials for these accounts are created manually. Traditional Service Accounts have several security problems and shortcomings:
-<ul>
-<li>Passwords are often configured to never expire.</li>
-<li>Passwords may be shared across multiple servers.</li>
-<li>Compromised passwords can be used from any machine.</li>
-<li>Service accounts are common targets for Kerberoasting and other credential theft attacks.</li>
-</ul>
-</li>
-<li>A Managed Service Account (MSA) is a special Active Directory account object that provides automatic password management and automatic Service Principal Name (SPN) management for services running on a single server.</li>
-<li>Group Managed Service Accounts (gMSAs) extend this functionality by allowing multiple authorized servers to run services using the same managed account while Active Directory automatically generates and periodically rotates the account password.</li>
-</ul>
-<p>A <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview" href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview">Delegated Managed Service Account</a> (dMSA) is a new type of managed service account introduced in Windows Server 2025. Its primary purpose is to provide a secure migration path away from traditional service accounts while reducing the risks associated with long-lived passwords and credential theft. Unlike traditional service accounts, dMSAs use managed credentials and tie authentication to authorized machines rather than relying solely on a reusable password.</p>
-<p>Windows Server 2025 addresses these issues with dMSAs by:</p>
-<ul>
-<li>Automatically managing credentials.</li>
-<li>Binding authentication to specific machine identities (other systems cannot use the same credentials).</li>
-<li>Preventing direct use of traditional service account passwords (uses &quot;machine-bound ID&quot; and Keys with automatic key rotation).</li>
-<li>Supporting gradual migration from legacy service accounts to dMSA
-<ul>
-<li>Can NOT migrate an MSA or a gMSA to dMSA.</li>
-</ul>
-</li>
-</ul>
-<p>Refer to the Microsoft Learn article on <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview" href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview">Delegated Managed Service Accounts overview</a> for more details, such as limitations and migration.</p>
 <h2 id="kerberos-delegation">Kerberos Delegation</h2>
 <p>Kerberos delegation is a feature of the Kerberos authentication protocol that allows a service to obtain access to another network service on behalf of a user, without requiring the user to re-enter their credentials. It is commonly used in multi-tier applications where one server must access another server while preserving the user&apos;s identity (for example, it allows a web server to access a database server using the user&apos;s ID instead of its own).</p>
 <ul>
@@ -890,6 +863,33 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 </li>
 </ul>
 <p>The general recommendation is to use Kerberos Constrained Delegation (KCD) whenever delegation is required and avoid unconstrained delegation unless necessary.</p>
+<h2 id="delegated-managed-service-accounts-dmsa">Delegated Managed Service Accounts (dMSA)</h2>
+<p>As a review from previous content:</p>
+<ul>
+<li>Service Accounts were regular user accounts (local, domain, or built-in accounts) that were used to run a service. The credentials for these accounts are created manually. Traditional Service Accounts have several security problems and shortcomings:
+<ul>
+<li>Passwords are often configured to never expire.</li>
+<li>Passwords may be shared across multiple servers.</li>
+<li>Compromised passwords can be used from any machine.</li>
+<li>Service accounts are common targets for Kerberoasting and other credential theft attacks.</li>
+</ul>
+</li>
+<li>A Managed Service Account (MSA) is a special Active Directory account object that provides automatic password management and automatic Service Principal Name (SPN) management for services running on a single server.</li>
+<li>Group Managed Service Accounts (gMSAs) extend this functionality by allowing multiple authorized servers to run services using the same managed account while Active Directory automatically generates and periodically rotates the account password.</li>
+</ul>
+<p>A <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview" href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview">Delegated Managed Service Account</a> (dMSA) is a new type of managed service account introduced in Windows Server 2025. Its primary purpose is to provide a secure migration path away from traditional service accounts while reducing the risks associated with long-lived passwords and credential theft. Unlike traditional service accounts, dMSAs use managed credentials and tie authentication to authorized machines rather than relying solely on a reusable password.</p>
+<p>Windows Server 2025 addresses these issues with dMSAs by:</p>
+<ul>
+<li>Automatically managing credentials.</li>
+<li>Binding authentication to specific machine identities (other systems cannot use the same credentials).</li>
+<li>Preventing direct use of traditional service account passwords (uses &quot;machine-bound ID&quot; and Keys with automatic key rotation).</li>
+<li>Supporting gradual migration from legacy service accounts to dMSA
+<ul>
+<li>Can NOT migrate an MSA or a gMSA to dMSA.</li>
+</ul>
+</li>
+</ul>
+<p>Refer to the Microsoft Learn article on <a data-from-md="" title="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview" href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview">Delegated Managed Service Accounts overview</a> for more details, such as limitations and migration.</p>
 <h2 id="virtual-accounts">Virtual Accounts</h2>
 <ul>
 <li>Virtual accounts were introduced in Windows 7 and Windows Server 2008 R2.</li>
@@ -962,7 +962,7 @@ pre.mermaid[data-processed=true] { white-space: unset; }
 </ul>
 </li>
 </ul>
-<p><sub class="jop-noMdConv">v1.0 2026-10-07</sub></p>
+<p><sub class="jop-noMdConv">v1.1 2026-10-10</sub></p>
 </div></div>
 					</body>
 				</html>
