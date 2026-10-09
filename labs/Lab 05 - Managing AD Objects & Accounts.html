@@ -590,6 +590,123 @@ hue-6-2: #c18401
 					content:"\f0c8";
 				}
 
+				.fountain {
+					font-family: monospace;
+					line-height: 107%;
+					max-width: 1000px;
+					margin-left: auto;
+					margin-right: auto;
+				}
+
+				.fountain .title-page,
+				.fountain .page {
+					padding: 1em 2em;
+					margin-bottom: 2em;
+				}
+
+				.fountain .title-page {
+					border-bottom: 1px solid #dddddd;
+				}
+
+				@media print {
+					.fountain .title-page,
+					.fountain .page {
+						page-break-after: always;
+					}
+
+					.fountain .title-page {
+						border-bottom: none;
+					}
+				}
+
+				.fountain hr {
+					border: none;
+					border-top: 1px solid #dddddd;
+					margin: 2em 0;
+				}
+
+				.fountain h1,
+				.fountain h2,
+				.fountain h3,
+				.fountain h4,
+				.fountain p {
+					font-weight: normal;
+					line-height: 107%;
+					margin: 1em 0;
+					border: none;
+					font-size: 1em;
+				}
+
+				.fountain .bold {
+					font-weight: bold;
+				}
+
+				.fountain .italic {
+					font-style: italic;
+				}
+
+				.fountain .underline {
+					text-decoration: underline;
+				}
+
+				.fountain .centered {
+					text-align: center;
+				}
+
+				.fountain h2 {
+					text-align: right;
+				}
+
+				.fountain .dialogue p.parenthetical {
+					margin-left: 11%;
+				}
+
+				.fountain .title-page .credit,
+				.fountain .title-page .authors,
+				.fountain .title-page .source {
+					text-align: center;
+				}
+
+				.fountain .title-page h1 {
+					margin-bottom: 1.5em;
+					text-align: center;
+				}
+
+				.fountain .title-page .source {
+					margin-top: 1.5em;
+				}
+
+				.fountain .title-page .notes {
+					text-align: right;
+					margin: 3em 0;
+				}
+
+				.fountain .title-page h1 {
+					margin-bottom: 1.5em;
+					text-align: center;
+				}
+
+				.fountain .dialogue {
+					margin-left: 3em;
+					margin-right: 3em;
+					margin-bottom: 1em;
+				}
+
+				.fountain .dialogue p,
+				.fountain .dialogue h1,
+				.fountain .dialogue h2,
+				.fountain .dialogue h3,
+				.fountain .dialogue h4 {
+					margin: 0;
+				}
+
+				.fountain .dialogue h1,
+				.fountain .dialogue h2,
+				.fountain .dialogue h3,
+				.fountain .dialogue h4 {
+					text-align: center;
+				}
+
 				.abc-notation-block svg {
 					background-color: white;
 				}
@@ -851,12 +968,12 @@ dir</pre><pre class="hljs"><code><span class="hljs-built_in">cd</span> C:\softwa
 <ul>
 <li>To create an Active Directory AD service account, execute the following command <strong>using the appropriate host name(s)</strong>:<div class="joplin-editable"><pre class="joplin-source" hidden="" data-joplin-language="powershell" data-joplin-source-open="```powershell
 " data-joplin-source-close="
-```">New-ADServiceAccount `
-    -Name App2Service `
-    -DNSHostName App2Service.comp2017-####.local `
-    -PrincipalsAllowedToRetrieveManagedPassword ServerGroup</pre><pre class="hljs"><code><span class="hljs-built_in">New-ADServiceAccount</span> `
-    <span class="hljs-literal">-Name</span> App2Service `
-    <span class="hljs-literal">-DNSHostName</span> App2Service.comp2017-<span class="hljs-comment">####.local `</span>
+```">New-ADServiceAccount 
+    -Name App2Service 
+    -DNSHostName App2Service.comp2017-####.local
+    -PrincipalsAllowedToRetrieveManagedPassword ServerGroup</pre><pre class="hljs"><code><span class="hljs-built_in">New-ADServiceAccount</span> 
+    <span class="hljs-literal">-Name</span> App2Service 
+    <span class="hljs-literal">-DNSHostName</span> App2Service.comp2017-<span class="hljs-comment">####.local</span>
     <span class="hljs-literal">-PrincipalsAllowedToRetrieveManagedPassword</span> ServerGroup</code></pre></div>
 </li>
 <li>To verify the creation:<div class="joplin-editable"><pre class="joplin-source" hidden="" data-joplin-language="powershell" data-joplin-source-open="```powershell
@@ -945,10 +1062,8 @@ dir</pre><pre class="hljs"><code><span class="hljs-built_in">cd</span> C:\softwa
 Or:<div class="joplin-editable"><pre class="joplin-source" hidden="" data-joplin-language="powershell" data-joplin-source-open="```powershell
 " data-joplin-source-close="
 ```">Get-ADServiceAccount App2Service -Properties * |
-    Select-Object Name,PrincipalsAllowedToRetrieveManagedPassword
-``</pre><pre class="hljs"><code><span class="hljs-built_in">Get-ADServiceAccount</span> App2Service <span class="hljs-literal">-Properties</span> * |
-    <span class="hljs-built_in">Select-Object</span> Name,PrincipalsAllowedToRetrieveManagedPassword
-``</code></pre></div>
+    Select-Object Name,PrincipalsAllowedToRetrieveManagedPassword</pre><pre class="hljs"><code><span class="hljs-built_in">Get-ADServiceAccount</span> App2Service <span class="hljs-literal">-Properties</span> * |
+    <span class="hljs-built_in">Select-Object</span> Name,PrincipalsAllowedToRetrieveManagedPassword</code></pre></div>
 </li>
 <li>Verify SRV1 is actually in ServerGroup on <code class="inline-code">DC1-2017-####</code> using <code class="inline-code">Get-ADGroupMember ServerGroup</code>
 <ul>
@@ -1025,7 +1140,7 @@ Review the policy settings meaning using Microsoft documentation for <a data-fro
 <li>A full window screenshot of the <code class="inline-code">Group Policy Management Editor</code> window, showing that you have set the <code class="inline-code">Minimum password length</code> to <code class="inline-code">15 characters</code>.</li>
 <li>A full window screenshot of the <code class="inline-code">Account Lockout Policy</code> window, showing that you have successfully enabled lockout after 5 invalid login attempts.</li>
 </ol>
-<p><sub class="jop-noMdConv">v2.0.0 2026-09-15</sub></p>
+<p><sub class="jop-noMdConv">v2.0.1 2026-10-09</sub></p>
 </div></div>
 					</body>
 				</html>
