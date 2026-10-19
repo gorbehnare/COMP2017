@@ -22,3 +22,4 @@
 - [Lab 04 - AD Certificate Services](./labs/Lab%2004%20-%20AD%20Certificate%20Services.html)
 - [Lab 05 - Managing AD Objects & Accounts](./labs/Lab%2005%20-%20Managing%20AD%20Objects%20&%20Accounts.html)
 - [Lab 06 - Maintaining Active Directory](./labs/Lab%2006%20-%20Maintaining%20Active%20Directory.html)
+- [Lab 07 - Group Policy](./labs/Lab%2007%20-%20Group%20Policy.html)
